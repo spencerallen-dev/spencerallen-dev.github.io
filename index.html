@@ -1,127 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spenny's World</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spencer's Land</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #000;
+      color: #00d4ff;
+      overflow-x: hidden;
+      height: 100%;
+    }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #1e1e2f, #3e3e5e);
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    canvas#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px);
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: rgba(0,0,0,0.8);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-        header h1 {
-            font-size: 2rem;
-            color: #ff6f61;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      transition: 0.3s;
+    }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
+    header h1:hover {
+      text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff;
+    }
 
-        nav a:hover {
-            color: #ff6f61;
-        }
+    nav a {
+      color: #00d4ff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-        /* Hero Section */
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 50px 20px;
-        }
+    nav a:hover {
+      color: #66ffff;
+      text-shadow: 0 0 10px #66ffff;
+    }
 
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #ffcc00;
-            animation: glow 1.5s infinite alternate;
-        }
+    .main-content {
+      text-align: center;
+      padding: 80px 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 30px;
-        }
+    .main-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .hero button {
-            padding: 15px 40px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 30px;
-            background: #ff6f61;
-            color: #fff;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .main-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      animation: glow 1.5s infinite alternate;
+    }
 
-        .hero button:hover {
-            background: #ff3b2e;
-        }
+    .main-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
 
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00; }
-            100% { text-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00; }
-        }
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      border-radius: 25px;
+      background-color: #00d4ff;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 15px 0;
-            background: rgba(0,0,0,0.4);
-        }
-    </style>
+    .buttons a.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease;
+    }
+
+    .buttons a:hover {
+      background-color: #66ffff;
+      box-shadow: 0 0 15px #66ffff, 0 0 30px #00d4ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    footer a {
+      color: #00d4ff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      color: #66ffff;
+      text-shadow: 0 0 10px #66ffff;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #00d4ff, 0 0 10px #00d4ff; }
+      100% { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Spenny</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+<canvas id="bg"></canvas>
 
-    <section class="hero">
-        <h2>Welcome to My World</h2>
-        <p>Discover cool projects, creative experiments, and a whole lot of awesome stuff I’m working on. Dive in and explore!</p>
-        <button onclick="alert('Let’s go!')">Get Started</button>
-    </section>
+<header>
+  <h1>Spenny</h1>
+  <nav>
+    <a href="#about">About</a>
+  </nav>
+</header>
 
-    <footer>
-        &copy; 2025 Spenny. All Rights Reserved.
-    </footer>
+<div class="main-content" id="about">
+  <h2>Spencer's Land</h2>
+  <p>Student – Brisbane, Australia</p>
+  <div class="buttons">
+    <!-- Updated links for GitHub Pages subpages -->
+    <a href="bloons/" target="_blank">Bloons</a>
+    <a href="school/" target="_blank">School</a>
+  </div>
+</div>
+
+<footer>
+  <a href="https://github.com/spencerallen" target="_blank">GitHub</a>
+  <a href="https://discord.com/users/YOURDISCORD" target="_blank">Discord</a>
+</footer>
+
+<script>
+  // Fade-in content
+  window.addEventListener('load', () => {
+    const main = document.querySelector('.main-content');
+    const buttons = document.querySelectorAll('.buttons a');
+    main.classList.add('visible');
+    buttons.forEach((btn, i) => setTimeout(() => btn.classList.add('visible'), i * 200));
+  });
+
+  // Particle background
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.size = Math.random() * 2 + 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
+    }
+    draw() {
+      ctx.fillStyle = '#00d4ff';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 100; i++) particles.push(new Particle());
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
 
 </body>
 </html>
