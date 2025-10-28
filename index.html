@@ -3,45 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My New Website</title>
+    <title>Spenny's World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f2f2f2;
+        /* Reset and base styles */
+        * {
             margin: 0;
-            padding: 50px;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 {
-            color: #333;
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #3e3e5e);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        p {
-            color: #666;
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
         }
-        a {
-            color: #1a73e8;
+
+        header h1 {
+            font-size: 2rem;
+            color: #ff6f61;
+        }
+
+        nav a {
+            color: #fff;
             text-decoration: none;
+            margin-left: 25px;
+            font-weight: 700;
+            transition: 0.3s;
         }
-        a:hover {
-            text-decoration: underline;
+
+        nav a:hover {
+            color: #ff6f61;
         }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #1a73e8;
-            color: white;
-            border-radius: 5px;
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
         }
-        .button:hover {
-            background-color: #155ab6;
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            background: #ff6f61;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .hero button:hover {
+            background: #ff3b2e;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00; }
+            100% { text-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: rgba(0,0,0,0.4);
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to My Website!</h1>
-    <p>This is my very first website. I’m excited to learn more and make it better!</p>
-    <a class="button" href="#">Click Me</a>
+
+    <header>
+        <h1>Spenny</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to My World</h2>
+        <p>Discover cool projects, creative experiments, and a whole lot of awesome stuff I’m working on. Dive in and explore!</p>
+        <button onclick="alert('Let’s go!')">Get Started</button>
+    </section>
+
+    <footer>
+        &copy; 2025 Spenny. All Rights Reserved.
+    </footer>
+
 </body>
 </html>
-
