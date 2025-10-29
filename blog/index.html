@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spencer Allen</title>
-
-  <!-- Favicon (your S.A. logo) -->
+  <title>Blog – Spencer Allen</title>
   <link rel="icon" href="https://avatars.githubusercontent.com/u/218202713?s=400&u=51caf98913829540eca74b7fa7ecb351ddd744bd&v=4" type="image/png">
-
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/blog.css">
 </head>
 <body>
 
@@ -18,17 +16,21 @@
 <header>
   <h1>Spencer Allen</h1>
   <nav>
-    <a href="about/">About</a>
-    <a href="blog/">Blog</a>
+    <a href="../">Home</a>
+    <a href="../about/">About</a>
+    <a href="../tech/">Tech</a>
   </nav>
 </header>
 
-<div class="main-content" id="about">
-  <h2>Spencer's Land</h2>
-  <p>Student – Brisbane, Australia</p>
-  <div class="buttons">
-    <a href="https://spencerallen.me/tech" target="_blank">Tech</a>
-    <a href="https://spencerallen.me/games" target="_blank">Games</a>
+<div class="main-content">
+  <div class="blog-container">
+    <div class="blog-intro">
+      <h2>Blog</h2>
+      <p>Thoughts on tech, coding, gaming, and more.</p>
+    </div>
+    <div class="blog-posts" id="blog-posts">
+      <div class="loading-message">Loading posts...</div>
+    </div>
   </div>
 </div>
 
@@ -36,7 +38,7 @@
   <a href="https://github.com/spencerallen-dev" target="_blank">GitHub</a>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="../js/blog.js"></script>
 
 </body>
 </html>

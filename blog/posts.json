@@ -1,0 +1,23 @@
+[
+  {
+    "id": "welcome-to-my-blog",
+    "title": "Welcome to My Blog",
+    "date": "2025-10-29",
+    "excerpt": "This is the first post on my new blog. Here I'll share my thoughts on technology, coding, and gaming.",
+    "content": "Welcome to my blog! I'm excited to start sharing my journey in tech, coding projects, and gaming adventures. This blog will be a place where I can document what I'm learning, share interesting projects, and connect with others who share similar interests.\n\nStay tuned for more posts about web development, Python scripting, game modding, and whatever else catches my interest!"
+  },
+  {
+    "id": "building-this-website",
+    "title": "Building This Website",
+    "date": "2025-10-28",
+    "excerpt": "A look at how I built this website using HTML, CSS, and JavaScript with a cyberpunk theme.",
+    "content": "Creating this website was a fun project. I wanted something that reflected my style - modern, animated, and with a cyberpunk aesthetic.\n\nThe key features include:\n- Animated particle background using HTML5 Canvas\n- Responsive design that works on all devices\n- Smooth fade-in animations\n- Clean, minimalist layout\n\nI used vanilla JavaScript for the animations to keep things lightweight and fast. The cyan and black color scheme gives it that futuristic feel I was going for."
+  },
+  {
+    "id": "learning-python",
+    "title": "My Python Learning Journey",
+    "date": "2025-10-25",
+    "excerpt": "Sharing my experience learning Python and some cool scripts I've created.",
+    "content": "Python has become one of my favorite programming languages. Its simplicity and versatility make it perfect for both beginners and advanced projects.\n\nI've been working on various scripts including:\n- Automation tools for daily tasks\n- Web scraping projects\n- Data analysis experiments\n\nThe Python community is amazing, and there are so many resources available for learning. If you're just starting out, I highly recommend diving in and building projects that interest you."
+  }
+]
