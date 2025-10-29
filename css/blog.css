@@ -126,6 +126,10 @@
   transition: 0.3s;
 }
 
+.back-link-container {
+  text-align: center;
+}
+
 .back-link:hover {
   background-color: #66ffff;
   box-shadow: 0 0 15px #66ffff;

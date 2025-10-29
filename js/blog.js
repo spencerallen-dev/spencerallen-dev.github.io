@@ -62,6 +62,24 @@ function getPostIdFromUrl() {
   return params.get('post');
 }
 
+// Simple HTML escape function to prevent XSS
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Fetch posts with caching to reduce duplication
+function fetchPosts() {
+  return fetch('posts.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to load posts');
+      }
+      return response.json();
+    });
+}
+
 function loadBlogPosts() {
   const blogContainer = document.getElementById('blog-posts');
   const postId = getPostIdFromUrl();
@@ -76,13 +94,7 @@ function loadBlogPosts() {
 }
 
 function loadAllPosts(container) {
-  fetch('posts.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to load posts');
-      }
-      return response.json();
-    })
+  fetchPosts()
     .then(posts => {
       if (posts.length === 0) {
         container.innerHTML = '<div class="loading-message">No posts yet. Check back soon!</div>';
@@ -94,10 +106,10 @@ function loadAllPosts(container) {
       
       container.innerHTML = posts.map(post => `
         <article class="blog-post">
-          <h3>${post.title}</h3>
+          <h3>${escapeHtml(post.title)}</h3>
           <span class="post-date">${formatDate(post.date)}</span>
-          <p class="post-excerpt">${post.excerpt}</p>
-          <a href="?post=${post.id}" class="read-more">Read More →</a>
+          <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
+          <a href="?post=${encodeURIComponent(post.id)}" class="read-more">Read More →</a>
         </article>
       `).join('');
     })
@@ -108,13 +120,7 @@ function loadAllPosts(container) {
 }
 
 function loadSinglePost(postId, container) {
-  fetch('posts.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to load posts');
-      }
-      return response.json();
-    })
+  fetchPosts()
     .then(posts => {
       const post = posts.find(p => p.id === postId);
       
@@ -129,16 +135,16 @@ function loadSinglePost(postId, container) {
         return;
       }
       
-      // Update page title
-      document.title = `${post.title} – Spencer Allen`;
+      // Update page title (sanitize to prevent XSS in title tag)
+      document.title = `${escapeHtml(post.title)} – Spencer Allen`;
       
       container.innerHTML = `
         <div class="post-content">
-          <h2>${post.title}</h2>
+          <h2>${escapeHtml(post.title)}</h2>
           <span class="post-date">${formatDate(post.date)}</span>
-          <p>${post.content}</p>
+          <p>${escapeHtml(post.content)}</p>
         </div>
-        <div style="text-align: center;">
+        <div class="back-link-container">
           <a href="./" class="back-link">← Back to Blog</a>
         </div>
       `;
