@@ -122,7 +122,7 @@ The blog system uses a simple JSON file to manage all posts. No HTML editing req
 
    After saving `posts.json`:
    
-   1. **Check JSON syntax**: Use a JSON validator (like jsonlint.com) to ensure there are no syntax errors
+   1. **Check JSON syntax**: Use a JSON validator (like https://jsonlint.com) to ensure there are no syntax errors
    2. **Preview locally**: If running a local server, refresh the blog page
    3. **Check on GitHub Pages**: After committing and pushing, wait a minute for GitHub Pages to rebuild
 
