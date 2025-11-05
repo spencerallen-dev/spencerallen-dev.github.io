@@ -10,11 +10,16 @@ const ctx = canvas.getContext('2d');
 let particles = [];
 let w, h;
 
+// Debounce resize events for better performance
+let resizeTimeout;
 function resize() {
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resize);
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(resize, 150);
+});
 resize();
 
 class Particle {
@@ -33,19 +38,26 @@ class Particle {
     this.y += this.vy;
     if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
   }
-  draw() {
-    ctx.fillStyle = '#00d4ff';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
 }
 
 for (let i = 0; i < 100; i++) particles.push(new Particle());
 
+// Set fill style once outside the loop
+ctx.fillStyle = '#00d4ff';
+
 function animate() {
   ctx.clearRect(0, 0, w, h);
-  particles.forEach(p => { p.update(); p.draw(); });
+  
+  // Batch draw operations for better performance
+  ctx.beginPath();
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.update();
+    ctx.moveTo(p.x + p.size, p.y);
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+  }
+  ctx.fill();
+  
   requestAnimationFrame(animate);
 }
 animate();
