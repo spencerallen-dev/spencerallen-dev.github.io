@@ -9,7 +9,8 @@ Personal website for Spencer Allen - A modern, animated portfolio site with a cy
 │   ├── style.css     # Main shared styles
 │   ├── tech.css      # Tech page specific styles
 │   ├── about.css     # About page specific styles
-│   └── blog.css      # Blog page specific styles
+│   ├── blog.css      # Blog page specific styles
+│   └── games.css     # Games page specific styles
 ├── js/               # JavaScript files
 │   ├── main.js       # Main script with button animations
 │   ├── simple.js     # Simplified script for pages without buttons
@@ -21,6 +22,8 @@ Personal website for Spencer Allen - A modern, animated portfolio site with a cy
 ├── blog/             # Blog section
 │   ├── index.html
 │   └── posts.json    # Blog posts data
+├── games/            # Games section (template for 4 games)
+│   └── index.html
 ├── index.html        # Homepage
 ├── 404.html          # 404 error page
 └── robots.txt        # SEO configuration
@@ -209,3 +212,45 @@ Copy and paste this template when adding a new post:
 - ✅ Styling with the site theme
 
 You only need to maintain the `posts.json` file!
+
+## Customizing the Games Page
+
+The games page is a template with 4 card sections that you can customize to showcase your favorite games, gaming projects, or mods.
+
+### How to Update the Games Page
+
+1. **Open the file**: Navigate to `games/index.html`
+
+2. **Edit each game card**: There are 4 game cards, each with:
+   - **Icon/Emoji**: Change the emoji in the `<h3>` tag (🎮, 🕹️, 👾, 🎯, or use your own)
+   - **Game Title**: Replace "Game Title 1", "Game Title 2", etc. with your actual game names
+   - **Description**: Update the paragraph text with your own content about each game
+
+### Example Customization
+
+**Before:**
+```html
+<div class="game-card">
+  <h3>🎮 Game Title 1</h3>
+  <p>Add your description here. Talk about what makes this game special...</p>
+</div>
+```
+
+**After:**
+```html
+<div class="game-card">
+  <h3>🚀 Kerbal Space Program</h3>
+  <p>My favorite space simulation game! I've created several mods including custom rocket parts and autopilot systems. Currently working on a realistic physics mod.</p>
+</div>
+```
+
+### Tips
+
+- Keep descriptions concise but engaging (2-3 sentences work well)
+- You can use any emoji that fits your game's theme
+- The cards automatically maintain consistent styling with the rest of the site
+- The page uses the same animated particle background as other pages
+
+### Viewing Your Games Page
+
+After making changes, visit: https://spencerallen.me/games/
