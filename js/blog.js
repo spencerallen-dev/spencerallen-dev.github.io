@@ -10,11 +10,16 @@ const ctx = canvas.getContext('2d');
 let particles = [];
 let w, h;
 
+// Debounce resize events for better performance
+let resizeTimeout;
 function resize() {
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resize);
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(resize, 150);
+});
 resize();
 
 class Particle {
@@ -33,19 +38,26 @@ class Particle {
     this.y += this.vy;
     if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
   }
-  draw() {
-    ctx.fillStyle = '#00d4ff';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
 }
 
 for (let i = 0; i < 100; i++) particles.push(new Particle());
 
+// Set fill style once outside the loop
+ctx.fillStyle = '#00d4ff';
+
 function animate() {
   ctx.clearRect(0, 0, w, h);
-  particles.forEach(p => { p.update(); p.draw(); });
+  
+  // Batch draw operations for better performance
+  ctx.beginPath();
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.update();
+    ctx.moveTo(p.x + p.size, p.y);
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+  }
+  ctx.fill();
+  
   requestAnimationFrame(animate);
 }
 animate();
@@ -62,11 +74,17 @@ function getPostIdFromUrl() {
   return params.get('post');
 }
 
-// Simple HTML escape function to prevent XSS
+// Simple HTML escape function to prevent XSS - optimized
 function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+  // Use a map for faster lookups instead of creating DOM elements
+  const escapeMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  };
+  return String(text).replace(/[&<>"']/g, char => escapeMap[char]);
 }
 
 // Fetch posts with caching to reduce duplication
@@ -104,14 +122,37 @@ function loadAllPosts(container) {
       // Sort posts by date (newest first)
       posts.sort((a, b) => new Date(b.date) - new Date(a.date));
       
-      container.innerHTML = posts.map(post => `
-        <article class="blog-post">
-          <h3>${escapeHtml(post.title)}</h3>
-          <span class="post-date">${formatDate(post.date)}</span>
-          <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
-          <a href="?post=${encodeURIComponent(post.id)}" class="read-more">Read More →</a>
-        </article>
-      `).join('');
+      // Use DocumentFragment for better performance
+      const fragment = document.createDocumentFragment();
+      posts.forEach(post => {
+        const article = document.createElement('article');
+        article.className = 'blog-post';
+        
+        const h3 = document.createElement('h3');
+        h3.textContent = post.title;
+        
+        const dateSpan = document.createElement('span');
+        dateSpan.className = 'post-date';
+        dateSpan.textContent = formatDate(post.date);
+        
+        const excerpt = document.createElement('p');
+        excerpt.className = 'post-excerpt';
+        excerpt.textContent = post.excerpt;
+        
+        const link = document.createElement('a');
+        link.href = '?post=' + encodeURIComponent(post.id);
+        link.className = 'read-more';
+        link.textContent = 'Read More →';
+        
+        article.appendChild(h3);
+        article.appendChild(dateSpan);
+        article.appendChild(excerpt);
+        article.appendChild(link);
+        fragment.appendChild(article);
+      });
+      
+      container.innerHTML = '';
+      container.appendChild(fragment);
     })
     .catch(error => {
       console.error('Error loading posts:', error);
@@ -135,19 +176,40 @@ function loadSinglePost(postId, container) {
         return;
       }
       
-      // Update page title (sanitize to prevent XSS in title tag)
-      document.title = `${escapeHtml(post.title)} – Spencer Allen`;
+      // Update page title
+      document.title = post.title + ' – Spencer Allen';
       
-      container.innerHTML = `
-        <div class="post-content">
-          <h2>${escapeHtml(post.title)}</h2>
-          <span class="post-date">${formatDate(post.date)}</span>
-          <p>${escapeHtml(post.content)}</p>
-        </div>
-        <div class="back-link-container">
-          <a href="./" class="back-link">← Back to Blog</a>
-        </div>
-      `;
+      // Use DOM methods for better performance
+      const postDiv = document.createElement('div');
+      postDiv.className = 'post-content';
+      
+      const h2 = document.createElement('h2');
+      h2.textContent = post.title;
+      
+      const dateSpan = document.createElement('span');
+      dateSpan.className = 'post-date';
+      dateSpan.textContent = formatDate(post.date);
+      
+      const content = document.createElement('p');
+      content.textContent = post.content;
+      
+      postDiv.appendChild(h2);
+      postDiv.appendChild(dateSpan);
+      postDiv.appendChild(content);
+      
+      const backDiv = document.createElement('div');
+      backDiv.className = 'back-link-container';
+      
+      const backLink = document.createElement('a');
+      backLink.href = './';
+      backLink.className = 'back-link';
+      backLink.textContent = '← Back to Blog';
+      
+      backDiv.appendChild(backLink);
+      
+      container.innerHTML = '';
+      container.appendChild(postDiv);
+      container.appendChild(backDiv);
     })
     .catch(error => {
       console.error('Error loading post:', error);
