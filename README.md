@@ -24,6 +24,8 @@ Personal website for Spencer Allen - A modern, animated portfolio site with a cy
 │   └── posts.json    # Blog posts data
 ├── games/            # Games section (template for 4 games)
 │   └── index.html
+├── admin/            # Admin panel (owner only)
+│   └── index.html
 ├── index.html        # Homepage
 ├── 404.html          # 404 error page
 └── robots.txt        # SEO configuration
@@ -37,6 +39,33 @@ Personal website for Spencer Allen - A modern, animated portfolio site with a cy
 - Smooth fade-in animations
 - Blog with dynamic post loading
 - GitHub Pages deployment
+
+## Admin Panel
+
+The site includes an admin panel at `/admin/` that provides convenient shortcuts for managing content. This owner-only interface offers:
+
+### What the Admin Panel Provides
+
+- **Quick access links** to common GitHub editor pages (blog folder, about pages, etc.)
+- **One-click actions** for creating new blog posts and uploading images
+- **Template generator** with a copy-to-clipboard blog post template
+- **Commit history** quick access
+
+### How to Use It
+
+The admin panel simplifies content management by providing direct links to GitHub's web editor. When you click a button in the admin panel, it opens the appropriate GitHub page where you can:
+
+1. **Create new blog posts**: Opens GitHub's new file interface in the blog directory
+2. **Edit existing pages**: Direct links to edit specific files like `about/index.html`
+3. **Upload images**: Opens GitHub's upload interface for assets
+4. **View recent changes**: Quick access to the commit history
+
+### Important Notes
+
+- The admin panel is protected and intended for the site owner only
+- All content changes are made through GitHub's interface, so they're tracked in version control
+- Changes pushed to the main branch automatically trigger GitHub Pages deployment
+- This is a static site tool - no server-side processing or database is involved
 
 ## Adding New Blog Posts
 
