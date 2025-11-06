@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Easy Admin — Spencerallen site (Owner only)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:system-ui,Arial;margin:18px;max-width:900px}
+    h1{margin-bottom:6px}
+    .btn{display:inline-block;padding:10px 14px;margin:6px 6px 6px 0;background:#0366d6;color:#fff;border-radius:6px;text-decoration:none}
+    .muted{color:#444;margin-top:6px}
+    textarea{width:100%;height:220px;margin-top:8px;font-family:inherit}
+    .card{padding:12px;border:1px solid #e1e4e8;border-radius:8px;margin-top:12px;background:#fafbfc}
+    .small{font-size:13px;color:#333}
+    /* lock overlay */
+    #lock { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; }
+    #lock .panel { background:#fff; padding:20px; border-radius:8px; width:320px; box-shadow:0 8px 24px rgba(0,0,0,0.2); text-align:center; }
+    #lock input[type="password"]{width:100%; padding:8px; margin-top:8px}
+    #lock button{margin-top:10px}
+    #hint{font-size:12px;color:#666;margin-top:6px}
+  </style>
+</head>
+<body>
+  <h1>Easy Admin Shortcuts</h1>
+  <p class="muted">No servers. Use GitHub’s editor to create/edit content and upload images. Click a button, edit, and commit.</p>
+
+  <!-- MAIN CONTENT -->
+  <div id="main" aria-hidden="true" style="display:none">
+    <div class="card">
+      <strong>One-click actions</strong>
+      <div style="margin-top:10px;">
+        <a class="btn" href="https://github.com/spencerallen-dev/spencerallen-dev.github.io/tree/main/blog" target="_blank">Open blog folder</a>
+        <a class="btn" href="https://github.com/spencerallen-dev/spencerallen-dev.github.io/new/main/blog" target="_blank">New blog post</a>
+        <a class="btn" href="https://github.com/spencerallen-dev/spencerallen-dev.github.io/tree/main/about" target="_blank">Open about pages</a>
+        <a class="btn" href="https://github.com/spencerallen-dev/spencerallen-dev.github.io/edit/main/about/index.html" target="_blank">Edit about/index.html</a>
+        <a class="btn" href="https://github.com/spencerallen-dev/spencerallen-dev.github.io/upload/main/assets/images" target="_blank">Upload image</a>
+        <a class="btn" href="https://github.com/spencerallen-dev/spencerallen-dev.github.io/commits/main" target="_blank">Recent commits</a>
+      </div>
+      <p class="small" style="margin-top:8px;">Notes: "New blog post" opens GitHub's new-file page in the blog folder. "Upload image" opens GitHub's upload page for /assets/images (create that folder if it doesn't exist).</p>
+    </div>
+
+    <div class="card">
+      <strong>How to create a new post (super simple)</strong>
+      <ol style="margin-top:8px;">
+        <li>Click "New blog post".</li>
+        <li>Choose a filename like: 2025-11-06-my-title.md</li>
+        <li>Copy the template below into the file, edit the text, then click "Commit new file".</li>
+        <li>Your site will rebuild on GitHub Pages automatically.</li>
+      </ol>
+
+      <p class="small">Example template (click "Copy template" to copy it):</p>
+      <button class="btn" id="copy">Copy template</button>
+      <textarea id="template">---
+title: "My Post Title"
+date: "2025-11-06T09:00:00Z"
+slug: "my-post-title"
+tags:
+  - javascript
+  - web
+draft: false
+excerpt: "One-sentence summary for the post."
+cover_image: "/assets/images/example.jpg"
+authors:
+  - name: "Spencer Allen"
+    github: "spencerallen-dev"
+---
+Write your article here in Markdown. Use headings, lists, images like: ![alt text](/assets/images/your-image.jpg)</textarea>
+      <p class="small muted">Tip: If you want a draft, set draft: true.</p>
+    </div>
+
+    <div class="card">
+      <strong>Uploading images</strong>
+      <ol style="margin-top:8px;">
+        <li>Click "Upload image".</li>
+        <li>Drag your image into the page and commit.</li>
+        <li>Use the URL /assets/images/your-image.jpg or the raw URL if needed.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <strong>If you want help</strong>
+      <p class="small">I can add this file to your repo for you, or walk you step-by-step while you do it. If you'd like me to add it, tell me "add admin file".</p>
+    </div>
+  </div>
+
+  <!-- LOCK OVERLAY (owner-only) -->
+  <div id="lock" role="dialog" aria-modal="true">
+    <div class="panel">
+      <h2>Owner access</h2>
+      <p id="hint">Enter your secret to unlock the admin panel.</p>
+      <input id="pw" type="password" placeholder="Secret phrase" />
+      <div>
+        <button class="btn" id="unlock">Unlock</button>
+        <button class="btn" id="cancel" style="background:#666">Cancel</button>
+      </div>
+      <p class="small" style="margin-top:8px;color:#888">This is a simple, local protection to keep casual viewers out. It is not a secure server-side gate. For production use the GitHub-OAuth option.</p>
+    </div>
+  </div>
+
+  <script>
+    // ===== CONFIG =====
+    // Replace the value of PASSWORD_B64 with base64 of your secret phrase.
+    // Example: 'mypassword' => btoa('mypassword') === 'bXlwYXNzd29yZA=='
+    // IMPORTANT: This is client-side protection only. Anyone can inspect the file to see this value.
+    const PASSWORD_B64 = 'Y2hhbmdlbWU='; // default = "changeme" (replace before use)
+
+    // ===== UI behavior =====
+    const lock = document.getElementById('lock');
+    const main = document.getElementById('main');
+    const unlockBtn = document.getElementById('unlock');
+    const cancelBtn = document.getElementById('cancel');
+    const pwInput = document.getElementById('pw');
+
+    function showMain() {
+      lock.style.display = 'none';
+      main.style.display = '';
+      main.setAttribute('aria-hidden','false');
+    }
+
+    function checkPassword(input) {
+      try {
+        const enc = btoa(input);
+        return enc === PASSWORD_B64;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    unlockBtn.addEventListener('click', () => {
+      const v = pwInput.value || '';
+      if (checkPassword(v)) {
+        showMain();
+      } else {
+        pwInput.value = '';
+        pwInput.focus();
+        alert('Wrong secret. If you forgot, update the file with a new secret (base64) or use the GitHub-OAuth admin.');
+      }
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      // redirect to homepage if they cancel access
+      window.location.href = '/';
+    });
+
+    // allow Enter key
+    pwInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') unlockBtn.click();
+    });
+
+    // ===== Copy template functionality =====
+    document.getElementById('copy').onclick = function(){
+      const t = document.getElementById('template');
+      t.select();
+      try {
+        document.execCommand('copy');
+        this.innerText = 'Copied!';
+        setTimeout(()=> this.innerText = 'Copy template',1500);
+      } catch(e) {
+        alert('Copy failed — select and copy manually.');
+      }
+    };
+
+    // Accessibility: focus password input on load
+    pwInput.focus();
+  </script>
+</body>
+</html>
