@@ -1,5 +1,12 @@
 [
   {
+    "id": "tinkering-with-mcp",
+    "title": "Tinkering with MCP",
+    "date": "2025-11-17",
+    "excerpt": "Exploring the Model Context Protocol and building custom tools to extend AI capabilities.",
+    "content": "I've been diving into the Model Context Protocol (MCP) lately and it's been a fascinating journey!\n\nMCP allows AI assistants to interact with external tools and data sources in a standardized way. I've been experimenting with creating custom MCP servers that can:\n- Access local files and repositories\n- Integrate with web APIs\n- Provide specialized functionality for specific tasks\n\nThe protocol is surprisingly flexible and well-designed. You can build servers in any language that supports JSON-RPC, and the client-server architecture makes it easy to add new capabilities.\n\nI'm working on a few custom tools right now and learning a lot about how AI assistants can be extended beyond their base capabilities. More updates coming soon as I continue tinkering!"
+  },
+  {
     "id": "welcome-to-my-blog",
     "title": "Welcome to My Blog",
     "date": "2025-10-29",
