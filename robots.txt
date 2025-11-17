@@ -1,2 +1,30 @@
 User-agent: *
+Allow: /
+
+# Block OpenAI
+User-agent: GPTBot
 Disallow: /
+
+# Block Anthropic (Claude)
+User-agent: ClaudeBot
+Disallow: /
+
+# Block Perplexity
+User-agent: PerplexityBot
+Disallow: /
+
+# Block Google’s AI crawler (not Google Search)
+User-agent: Google-Extended
+Disallow: /
+
+# Block CommonCrawl (used by many AI models)
+User-agent: CCBot
+Disallow: /
+
+# Block Meta (Facebook) AI dataset crawler
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# Block Apple AI crawler
+User-agent: Applebot-Extended
+Disallow: /.
