@@ -24,10 +24,6 @@ Personal website for Spencer Allen - A modern, animated portfolio site with a cy
 │   └── posts.json    # Blog posts data
 ├── games/            # Games section (template for 4 games)
 │   └── index.html
-├── mc-checker/       # Minecraft server checker (static JS)
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
 ├── index.html        # Homepage
 ├── 404.html          # 404 error page
 └── robots.txt        # SEO configuration
@@ -40,17 +36,7 @@ Personal website for Spencer Allen - A modern, animated portfolio site with a cy
 - Dark theme with cyan accents
 - Smooth fade-in animations
 - Blog with dynamic post loading
-- Minecraft server checker at `/mc-checker/` (static JS)
 - GitHub Pages deployment
-
-## MC Checker (`/mc-checker/`)
-
-The Minecraft server checker is a **pure static frontend** for GitHub Pages:
-
-- No Python runtime
-- No Flask backend
-- No `mc_checker.py` or `requirements.txt` dependency at runtime
-- Uses browser-side `fetch` to query `https://api.mcsrvstat.us/2/<host>`
 
 ## Adding New Blog Posts
 
