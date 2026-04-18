@@ -77,7 +77,7 @@ function setLoading(isLoading) {
 }
 
 function isLikelyValidHost(input) {
-  if (input.length < 1 || input.length > 253 || /\s/.test(input)) {
+  if (input.length === 0 || input.length > 253 || /\s/.test(input)) {
     return false;
   }
   return /^[a-zA-Z0-9._:-]+$/.test(input);
@@ -92,9 +92,6 @@ function readMotd(motd) {
   }
   if (typeof motd.clean === 'string') {
     return motd.clean.trim();
-  }
-  if (Array.isArray(motd.html)) {
-    return motd.html.join(' ').replace(/<[^>]*>/g, '').trim();
   }
   return '';
 }
