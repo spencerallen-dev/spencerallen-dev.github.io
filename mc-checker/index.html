@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MC Checker – Spencer Allen</title>
+  <meta name="description" content="Check Minecraft Java Edition server status, version, players, and MOTD.">
+  <meta property="og:title" content="MC Checker – Spencer Allen">
+  <meta property="og:description" content="Static Minecraft server status checker powered by mcsrvstat.us.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://spencerallen.me/mc-checker/">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/218202713?s=400&u=51caf98913829540eca74b7fa7ecb351ddd744bd&v=4" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mc-checker-page">
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <header class="mc-header">
+    <h1>Spencer Allen</h1>
+    <nav aria-label="Main navigation">
+      <a href="../">Home</a>
+      <a href="../about/">About</a>
+      <a href="../tech/">Tech</a>
+      <a href="../games/">Games</a>
+      <a href="../blog/">Blog</a>
+      <a href="../mc-checker/" aria-current="page">MC Checker</a>
+    </nav>
+  </header>
+
+  <main class="mc-main-content">
+    <section class="mc-checker-container" aria-labelledby="mc-checker-title">
+      <h2 id="mc-checker-title">Minecraft Server Checker</h2>
+      <p class="mc-subtitle">Java Edition server status lookup (static GitHub Pages frontend)</p>
+
+      <form id="checkerForm" class="mc-input-section" novalidate>
+        <label for="serverInput">Server host or IP</label>
+        <div class="mc-input-group">
+          <input
+            type="text"
+            id="serverInput"
+            name="server"
+            autocomplete="off"
+            placeholder="mc.hypixel.net"
+            aria-describedby="statusMessage"
+          >
+          <button id="checkBtn" type="submit">Check Server</button>
+        </div>
+      </form>
+
+      <div class="mc-progress-bar" id="progressBar" aria-hidden="true">
+        <div class="mc-progress-fill"></div>
+      </div>
+
+      <div id="statusMessage" class="mc-status-message" role="status" aria-live="polite">
+        Enter a server address and select “Check Server”.
+      </div>
+
+      <section class="mc-results-container" aria-labelledby="resultsTitle">
+        <h3 id="resultsTitle">Server Information</h3>
+        <div class="mc-results-box">
+          <pre id="resultsText">Waiting for server check...</pre>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="mc-footer">
+    <a href="https://github.com/spencerallen-dev">GitHub</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
