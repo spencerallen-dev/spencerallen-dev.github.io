@@ -1,3 +1,5 @@
+Sitemap: https://spencerallen.me/sitemap.xml
+
 User-agent: *
 Allow: /
 
