@@ -1,5 +1,12 @@
 [
   {
+    "id": "renewed-website-proton-privacy",
+    "title": "A Year of Growth & Privacy: Website Renewal & Switching to Proton",
+    "date": "2026-06-21",
+    "excerpt": "Celebrating another year of my personal website and prioritizing privacy with Proton.",
+    "content": "It's been an incredible year, and I'm thrilled to announce that I've renewed my website for another year of growth and exploration!\n\nWhen I first launched spencerallen-dev.github.io, I had big ambitions for what I wanted to share and build. Looking back, I'm proud of the projects I've documented, the posts I've written, and the community I'm building. Whether it's my tinkering with MCP, sharing my Python learning journey, or exploring cyberpunk web design, this site has become a genuine reflection of my tech interests and growth.\n\nWith another year ahead, I'm looking forward to:\n- Diving deeper into emerging technologies\n- Sharing more detailed project breakdowns\n- Building increasingly complex tools and experiments\n- Connecting with others in the tech community\n\n## Privacy Takes Priority\n\nAlong with renewing my site, I've made an important decision to switch to **Proton** for better privacy protection. In today's digital landscape, it's becoming increasingly clear that privacy isn't a luxury—it's a necessity.\n\nI've transitioned to Proton Mail and Proton VPN to ensure that my communications and online activities are encrypted end-to-end. Here's why this matters to me:\n\n**End-to-End Encryption**: Proton Mail encrypts all my emails before they even leave my device. Even Proton themselves can't read my messages. That's the kind of privacy I want.\n\n**No Data Harvesting**: Unlike some mainstream email providers, Proton doesn't scan my emails for advertising purposes or sell my data to third parties.\n\n**VPN Security**: Proton VPN masks my IP address and encrypts my internet traffic, giving me protection on public Wi-Fi and keeping my browsing habits private.\n\nWith all the data breaches and privacy concerns we've seen lately, taking control of my digital privacy feels like the right move. It's a small investment in peace of mind.\n\nHere's to another year of building, learning, and staying secure! If you've been thinking about privacy too, I'd definitely recommend checking out what Proton offers."
+  },
+  {
     "id": "tinkering-with-mcp",
     "title": "Tinkering with MCP",
     "date": "2025-11-17",
