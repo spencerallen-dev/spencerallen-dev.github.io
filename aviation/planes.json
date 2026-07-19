@@ -1,0 +1,167 @@
+[
+  {
+    "id": "737-600",
+    "name": "Boeing 737-600",
+    "tag": "Rarest NG Jet",
+    "theme": "theme-cyber",
+    "summary": "The heavy, slow-selling 'Baby Boeing' of the Next Generation series, now famously operated by the U.S. Government's secret 'Janet' airline.",
+    "image": "../images/737-600.jpg",
+    "specs": {
+      "Fuselage Length": "31.2 meters (102 ft 6 in)",
+      "Wingspan": "34.3 meters (112 ft 7 in)",
+      "Height": "12.6 meters (41 ft 3 in)",
+      "Engines": "2x CFM International CFM56-7B20/22",
+      "Cruising Speed": "Mach 0.785 (853 km/h)",
+      "Maximum Range": "5,648 km (3,050 nmi)",
+      "Seating Capacity": "108 (2-class) to 130 (1-class)",
+      "Production Output": "69 units"
+    },
+    "story": "The Boeing 737-600 was developed in the mid-1990s as the smallest member of the Next Generation (NG) family. While Boeing hoped to replace the older 737-500 and capture the 100-seat regional jet market, the aircraft suffered from harsh economic realities. Because it shared the same wings, tail, landing gear, and heavy structural components as its larger sibling, the 737-700, the 737-600 carried significant 'dead weight'. This meant that airlines would burn nearly identical amounts of fuel to carry fewer passengers, leading to terrible seat-mile economics. Ultimately, only 69 were built.\n\nDespite its commercial failure, the 737-600 found a second, mysterious life. The United States Air Force acquired several retired commercial -600s to operate as part of the highly classified 'Janet' fleet out of Las Vegas, transporting workers to secret military installations like Area 51 and the Tonopah Test Range.",
+    "operators": [
+      {
+        "name": "Janet Airlines",
+        "status": "Active (Military)",
+        "desc": "Operating unmarked aircraft to transport military contractors and researchers to classified sites in Nevada."
+      },
+      {
+        "name": "Air Algérie",
+        "status": "Active (Commercial)",
+        "desc": "One of the last commercial passenger operators of the type, utilizing them on thin domestic routes."
+      },
+      {
+        "name": "KF Aerospace",
+        "status": "Active (Specialist)",
+        "desc": "Canadian aircraft maintenance and charter group employing the -600 for rugged operations."
+      }
+    ]
+  },
+  {
+    "id": "bristol-188",
+    "name": "Bristol Type 188",
+    "tag": "Stainless Steel Research",
+    "theme": "theme-retro-blue",
+    "summary": "Nicknamed the 'Flaming Pencil', this British experimental jet was made of solid stainless steel to research kinetic heating at supersonic speeds.",
+    "image": "../images/bristol-188.jpg",
+    "specs": {
+      "Fuselage Length": "23.68 meters (77 ft 8 in)",
+      "Wingspan": "10.70 meters (35 ft 1 in)",
+      "Height": "4.27 meters (14 ft)",
+      "Engines": "2x de Havilland Gyron Junior DGJ.10R",
+      "Cruising Speed": "Mach 1.6 (Supersonic)",
+      "Maximum Range": "Limited (Research flights only)",
+      "Seating Capacity": "1 (Pilot only)",
+      "Production Output": "3 units (2 flight, 1 static)"
+    },
+    "story": "Commissioned in the 1950s, the Bristol Type 188 was built to explore the 'thermal thicket'—the extreme kinetic heating that occurs when aircraft fly faster than Mach 2. Because conventional aluminum melts at these temperatures, Bristol constructed the aircraft almost entirely from stainless steel. This required inventing entirely new manufacturing techniques, including specialized puddle welding, which caused severe delays.\n\nThe aircraft suffered from short range and underpowered engines. Ironically, despite being designed to study flight up to Mach 3, it never reached its design target due to engine limitations and excessive fuel consumption, maxing out at Mach 1.88. However, the pioneering metallurgy and thermal research collected from the 'Flaming Pencil' laid the foundation for the design of the Anglo-French Concorde.",
+    "operators": [
+      {
+        "name": "Royal Aircraft Establishment",
+        "status": "Retired",
+        "desc": "Conducted supersonic aerodynamics, thermodynamics, and high-speed telemetry research at Bedford."
+      },
+      {
+        "name": "RAF Museum Cosford",
+        "status": "Preserved",
+        "desc": "The surviving flight frame, XF926, is on public display in the Cold War exhibition."
+      }
+    ]
+  },
+  {
+    "id": "747sp",
+    "name": "Boeing 747SP",
+    "tag": "Special Performance Jumbo",
+    "theme": "theme-retro-orange",
+    "summary": "A shortened, stubby version of the 'Queen of the Skies' designed to fly higher, faster, and farther than any other airliner of its era.",
+    "image": "../images/747sp.jpg",
+    "specs": {
+      "Fuselage Length": "56.3 meters (184 ft 9 in)",
+      "Wingspan": "59.6 meters (195 ft 8 in)",
+      "Height": "20.1 meters (65 ft 10 in)",
+      "Engines": "4x Pratt & Whitney JT9D-7 or Rolls-Royce RB211-524",
+      "Cruising Speed": "Mach 0.84 (900 km/h)",
+      "Maximum Range": "12,325 km (6,650 nmi)",
+      "Seating Capacity": "276 (3-class) to 400 (1-class)",
+      "Production Output": "45 units"
+    },
+    "story": "In the early 1970s, Pan Am and Iran Air requested an airliner capable of flying long, non-stop routes, such as New York to Tokyo or Tehran to Los Angeles. Boeing responded by shortening the standard 747-100 fuselage by 48 feet, reducing weight and allowing for larger fuel capacity. To compensate for the shortened fuselage lever arm, Boeing fitted the SP with a massive vertical tailfin and updated the wing structures.\n\nThe result was the fastest commercial airliner of its day (outside of Concorde), capable of cruising higher than standard jumbos (above turbulences and other traffic) and covering unprecedented distances. Though twinjets eventually made four-engine layouts obsolete, the 747SP remains a cult favorite. NASA famously used one to carry the SOFIA infrared telescope, and several remain in service as VIP transport for royal families.",
+    "operators": [
+      {
+        "name": "Las Vegas Sands Corp",
+        "status": "Active (VIP)",
+        "desc": "Utilized as a luxury private transport for high-rollers and executives."
+      },
+      {
+        "name": "Pratt & Whitney Canada",
+        "status": "Active (Testbed)",
+        "desc": "Modified to serve as an airborne engine testbed for testing next-generation turbofans."
+      },
+      {
+        "name": "NASA (SOFIA)",
+        "status": "Retired",
+        "desc": "Carried the Stratospheric Observatory for Infrared Astronomy telescope into the upper atmosphere."
+      }
+    ]
+  },
+  {
+    "id": "f14",
+    "name": "Grumman F-14 Tomcat",
+    "tag": "Supersonic Sweep-Wing",
+    "theme": "theme-military",
+    "summary": "The U.S. Navy's premier carrier-based interceptor, featuring variable-sweep wings, a radar HUD, and the long-range Phoenix missile system.",
+    "image": "../images/f14.jpg",
+    "specs": {
+      "Fuselage Length": "19.1 meters (62 ft 9 in)",
+      "Wingspan": "19.55 m (spread) / 11.58 m (swept)",
+      "Height": "4.88 meters (16 ft)",
+      "Engines": "2x Pratt & Whitney TF30 (A) / GE F110-400 (B/D)",
+      "Cruising Speed": "Mach 2.34 (2,485 km/h / Max Speed)",
+      "Maximum Range": "3,000 km (1,600 nmi)",
+      "Seating Capacity": "2 (Pilot and Radar Intercept Officer)",
+      "Production Output": "712 units"
+    },
+    "story": "The F-14 Tomcat was engineered to defend aircraft carrier groups against Soviet bomber raids. To achieve both low-speed stability for carrier landings and supersonic speeds for intercept missions, Grumman incorporated variable-sweep wings. A computerized flight control system swept the wings automatically between 20° and 68° based on speed.\n\nPaired with the AWG-9 radar and AIM-54 Phoenix missiles, the Tomcat could track and engage up to six targets simultaneously at distances over 100 miles. Celebrated in pop culture by the movie 'Top Gun', the Tomcat was retired by the U.S. Navy in 2006 in favor of the F/A-18 Super Hornet. However, the Islamic Republic of Iran Air Force (IRIAF) still operates a small number of Tomcats acquired before the 1979 revolution.",
+    "operators": [
+      {
+        "name": "U.S. Navy",
+        "status": "Retired (2006)",
+        "desc": "Served as the primary carrier-based air superiority fighter and interceptor for three decades."
+      },
+      {
+        "name": "IRIAF (Iran)",
+        "status": "Active (Defensive)",
+        "desc": "Continues to operate heavily maintained and reverse-engineered Tomcats for air defense."
+      }
+    ]
+  },
+  {
+    "id": "a350-1000ulr",
+    "name": "Airbus A350-1000 ULR",
+    "tag": "Project Sunrise Ultra-Long",
+    "theme": "theme-modern-luxury",
+    "summary": "Qantas' custom-configured flagship designed to conquer 'Project Sunrise'—flying passenger routes up to 22 hours non-stop.",
+    "image": "../images/a350-1000ulr.jpg",
+    "specs": {
+      "Fuselage Length": "73.79 meters (242 ft 1 in)",
+      "Wingspan": "64.75 meters (212 ft 5 in)",
+      "Height": "17.08 meters (56 ft)",
+      "Engines": "2x Rolls-Royce Trent XWB-97",
+      "Cruising Speed": "Mach 0.85 (903 km/h)",
+      "Maximum Range": "18,500 km (10,000 nmi)",
+      "Seating Capacity": "238 passengers (Low density premium)",
+      "Production Output": "In Production (Qantas fleet)"
+    },
+    "story": "Qantas' 'Project Sunrise' is the holy grail of commercial aviation: non-stop flights connecting Sydney and Melbourne directly to London and New York. To make these grueling 22-hour journeys possible, Airbus developed a specialized Ultra-Long Range (ULR) variant of the A350-1000. It features an additional 20,000-liter fuel tank built into the fuselage, allowing it to carry the necessary fuel without reducing payload.\n\nBecause passenger comfort is critical on a day-long flight, Qantas configured the cabin for just 238 passengers (compared to the standard 350+ seats). Over 40% of the cabin is dedicated to premium classes, and it features a unique 'Wellbeing Zone' between the cabins where travelers can stand, stretch, hydrate, and participate in guided stretching routines to combat deep vein thrombosis.",
+    "operators": [
+      {
+        "name": "Qantas",
+        "status": "On Order / Testing",
+        "desc": "Launch operator for Project Sunrise, preparing to launch flights in the late 2020s."
+      },
+      {
+        "name": "Airbus Industries",
+        "status": "Active (Testing)",
+        "desc": "Performing flight validation, structural loading, and range test missions for ULR certification."
+      }
+    ]
+  }
+]
