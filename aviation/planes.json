@@ -163,5 +163,335 @@
         "desc": "Performing flight validation, structural loading, and range test missions for ULR certification."
       }
     ]
+  },
+  {
+    "id": "a380",
+    "name": "Airbus A380-800",
+    "tag": "Double-Deck Superjumbo",
+    "theme": "theme-modern-luxury",
+    "summary": "The largest passenger airliner in history, offering double-deck luxury but challenging market economics.",
+    "image": "../images/a380.jpg",
+    "specs": {
+      "Fuselage Length": "72.72 meters (238 ft 7 in)",
+      "Wingspan": "79.75 meters (261 ft 8 in)",
+      "Height": "24.09 meters (79 ft)",
+      "Engines": "4x Engine Alliance GP7200 or Rolls-Royce Trent 900",
+      "Cruising Speed": "Mach 0.85 (903 km/h)",
+      "Maximum Range": "15,200 km (8,200 nmi)",
+      "Seating Capacity": "525 (3-class) to 853 (all-economy)",
+      "Production Output": "251 units"
+    },
+    "story": "Launched in the early 2000s, the A380 was Airbus' answer to congested hub airports. It offered unprecedented luxury, including onboard showers, duty-free shops, and bar lounges. However, the aviation industry shifted away from the 'hub-and-spoke' model towards 'point-to-point' flights operated by smaller, highly efficient twinjets like the 787 and A350. This made the four-engine A380 expensive to fill and maintain, leading to an early end to its production in 2021.",
+    "operators": [
+      {
+        "name": "Emirates",
+        "status": "Active",
+        "desc": "The largest operator by far, making the superjumbo the flagship of their global Dubai hub."
+      },
+      {
+        "name": "Singapore Airlines",
+        "status": "Active",
+        "desc": "The launch operator of the A380, continuing to fly them on major trunk routes."
+      },
+      {
+        "name": "British Airways",
+        "status": "Active",
+        "desc": "Utilizes the superjumbo for high-density trans-Atlantic and Asian passenger flights."
+      }
+    ]
+  },
+  {
+    "id": "sr71",
+    "name": "Lockheed SR-71 Blackbird",
+    "tag": "Titanium Spyplane",
+    "theme": "theme-military",
+    "summary": "The legendary Mach 3+ reconnaissance jet that operated at 85,000 feet, constructed of titanium to survive extreme heat.",
+    "image": "../images/sr71.jpg",
+    "specs": {
+      "Fuselage Length": "32.74 meters (107 ft 5 in)",
+      "Wingspan": "16.94 meters (55 ft 7 in)",
+      "Height": "5.64 meters (18 ft 6 in)",
+      "Engines": "2x Pratt & Whitney J58 afterburning turbojets",
+      "Cruising Speed": "Mach 3.2 (3,540 km/h / Max Speed)",
+      "Maximum Range": "5,400 km (2,900 nmi)",
+      "Seating Capacity": "2 (Pilot and Reconnaissance Systems Officer)",
+      "Production Output": "32 units"
+    },
+    "story": "Developed by Lockheed's secret Skunk Works division, the SR-71 Blackbird was designed to fly at the edge of space to outrun any hostile threat. To withstand air friction heating the airframe up to 500°F, 85% of the aircraft was made of titanium (ironically sourced secretly from the Soviet Union). It flew so fast and high that its standard evasive action against surface-to-air missiles was simply to accelerate. No Blackbird was ever shot down by enemy fire in its history.",
+    "operators": [
+      {
+        "name": "United States Air Force",
+        "status": "Retired (1998)",
+        "desc": "Operated strategic reconnaissance missions during the height of the Cold War."
+      },
+      {
+        "name": "NASA",
+        "status": "Retired (1999)",
+        "desc": "Utilized the planes for high-speed, high-altitude science and aerodynamic testing."
+      }
+    ]
+  },
+  {
+    "id": "an225",
+    "name": "Antonov An-225 Mriya",
+    "tag": "Six-Engine Cargo Giant",
+    "theme": "theme-retro-blue",
+    "summary": "The largest and heaviest aircraft ever built, designed to transport the Soviet Buran space shuttle, tragically destroyed in 2022.",
+    "image": "../images/an225.jpg",
+    "specs": {
+      "Fuselage Length": "84 meters (275 ft 7 in)",
+      "Wingspan": "88.4 meters (290 ft)",
+      "Height": "18.1 meters (59 ft 5 in)",
+      "Engines": "6x Progress D-18T turbofans",
+      "Cruising Speed": "Mach 0.65 (800 km/h)",
+      "Maximum Range": "15,400 km (8,300 nmi)",
+      "Seating Capacity": "6 (Flight crew only)",
+      "Production Output": "1 unit"
+    },
+    "story": "Meaning 'Dream' in Ukrainian, the Antonov An-225 was a marvel of heavy engineering. Featuring six turbofans and a 32-wheel landing gear system, it held the world record for the heaviest cargo payload ever airlifted (253 tonnes). Initially built in the late 1980s for the Soviet space program, it spent decades carrying out super-heavy charter cargo flights. Tragically, the single completed An-225 was destroyed during the Battle of Antonov Airport in February 2022.",
+    "operators": [
+      {
+        "name": "Antonov Airlines",
+        "status": "Destroyed (2022)",
+        "desc": "Operated the aircraft for commercial heavy-lift charter cargo tasks worldwide."
+      }
+    ]
+  },
+  {
+    "id": "tu144",
+    "name": "Tupolev Tu-144",
+    "tag": "Soviet Supersonic",
+    "theme": "theme-retro-blue",
+    "summary": "The first commercial supersonic transport in history, nicknamed 'Concordski', which beat Concorde to the skies but had a brief, troubled career.",
+    "image": "../images/tu144.jpg",
+    "specs": {
+      "Fuselage Length": "65.7 meters (215 ft 6 in)",
+      "Wingspan": "28.8 meters (94 ft 6 in)",
+      "Height": "12.85 meters (42 ft 2 in)",
+      "Engines": "4x Kuznetsov NK-144 afterburning turbofans",
+      "Cruising Speed": "Mach 2.0 (2,120 km/h)",
+      "Maximum Range": "6,500 km (3,500 nmi)",
+      "Seating Capacity": "120 passengers",
+      "Production Output": "16 units"
+    },
+    "story": "The Tu-144 actually flew supersonically before Concorde, making history in 1969. However, its development was rushed due to political pressure. It suffered from terrible interior noise because its afterburners had to run continuously to sustain supersonic speeds, and it had poor fuel efficiency. Following a series of high-profile crashes and reliability issues, it was retired from passenger service after only 55 scheduled flights, later finding work as a NASA research testbed.",
+    "operators": [
+      {
+        "name": "Aeroflot",
+        "status": "Retired",
+        "desc": "Operated passenger flights between Moscow and Almaty briefly in the 1970s."
+      },
+      {
+        "name": "NASA / Boeing",
+        "status": "Retired (1999)",
+        "desc": "Jointly operated a modified Tu-144LL for supersonic transport research."
+      }
+    ]
+  },
+  {
+    "id": "l1011",
+    "name": "Lockheed L-1011 TriStar",
+    "tag": "Whisperliner Autoland",
+    "theme": "theme-retro-orange",
+    "summary": "The most technologically advanced passenger jet of the 1970s, featuring a highly automated flight deck and S-duct engine configuration.",
+    "image": "../images/l1011.jpg",
+    "specs": {
+      "Fuselage Length": "54.17 meters (177 ft 9 in)",
+      "Wingspan": "47.35 meters (155 ft 4 in)",
+      "Height": "16.87 meters (55 ft 4 in)",
+      "Engines": "3x Rolls-Royce RB211-22B",
+      "Cruising Speed": "Mach 0.82 (860 km/h)",
+      "Maximum Range": "7,410 km (4,000 nmi)",
+      "Seating Capacity": "256 (3-class) to 400 (1-class)",
+      "Production Output": "250 units"
+    },
+    "story": "Nicknamed the 'Whisperliner', the L-1011 was a technological masterpiece. It featured a revolutionary AFCS (Avionic Flight Control System) that could fly the plane automatically from takeoff to landing, including zero-visibility auto-landings. It also featured an S-duct layout for the tail engine, which made it quieter and structurally stronger. Despite its technological superiority over the DC-10, delays in Rolls-Royce engine production hurt sales, forcing Lockheed to exit the commercial aviation business.",
+    "operators": [
+      {
+        "name": "Delta Air Lines",
+        "status": "Retired",
+        "desc": "Operated the largest fleet of L-1011 TriStars, utilizing them for domestic trunk routes."
+      },
+      {
+        "name": "Eastern Air Lines",
+        "status": "Retired",
+        "desc": "The launch operator who introduced the 'Whisperliner' to commercial operations."
+      },
+      {
+        "name": "TWA",
+        "status": "Retired",
+        "desc": "Flew the TriStar extensively on domestic routes and trans-Atlantic flights."
+      }
+    ]
+  },
+  {
+    "id": "md11",
+    "name": "Automation Tri-Jet",
+    "theme": "theme-cyber",
+    "tag": "Automation Tri-Jet Cargo",
+    "summary": "An updated, automated successor to the DC-10 featuring winglets, a glass cockpit, and a highly active second life as a cargo freighter.",
+    "image": "../images/md11.jpg",
+    "specs": {
+      "Fuselage Length": "61.21 meters (200 ft 10 in)",
+      "Wingspan": "51.66 meters (169 ft 6 in)",
+      "Height": "17.6 meters (57 ft 9 in)",
+      "Engines": "3x Pratt & Whitney PW4460 or GE CF6-80C2",
+      "Cruising Speed": "Mach 0.82 (876 km/h)",
+      "Maximum Range": "12,670 km (6,840 nmi)",
+      "Seating Capacity": "285 (3-class) to 410 (all-economy)",
+      "Production Output": "200 units"
+    },
+    "story": "The MD-11 was designed to compete with the emerging twins of the early 90s. By replacing the flight engineer with a glass cockpit and adding aerodynamic winglets, McDonnell Douglas hoped to revitalize the classic tri-jet. However, the MD-11 fell short of its initial range and fuel efficiency targets, which led to cancelled airline orders. In passenger operations, its small tailplane made landing speeds very fast and tricky. However, cargo operators like FedEx fell in love with its high cargo volume, and it continues to fly cargo missions today.",
+    "operators": [
+      {
+        "name": "FedEx Express",
+        "status": "Active (Cargo)",
+        "desc": "The primary operator of the MD-11 freighter, serving global cargo links."
+      },
+      {
+        "name": "UPS Airlines",
+        "status": "Active (Cargo)",
+        "desc": "Fliess a significant fleet of MD-11 freighters for international express delivery."
+      },
+      {
+        "name": "Lufthansa Cargo",
+        "status": "Retired (2021)",
+        "desc": "Flew them as key cargo flagships before replacing them with twinjet freighters."
+      }
+    ]
+  },
+  {
+    "id": "a318",
+    "name": "Airbus A318",
+    "tag": "Steep Approach Baby Bus",
+    "theme": "theme-cyber",
+    "summary": "The smallest member of the A320 family, certified for steep approaches to land at constrained airports like London City.",
+    "image": "../images/a318.jpg",
+    "specs": {
+      "Fuselage Length": "31.44 meters (103 ft 2 in)",
+      "Wingspan": "34.1 meters (111 ft 11 in)",
+      "Height": "12.51 meters (41 ft)",
+      "Engines": "2x CFM56-5B or Pratt & Whitney PW6000",
+      "Cruising Speed": "Mach 0.78 (828 km/h)",
+      "Maximum Range": "5,750 km (3,100 nmi)",
+      "Seating Capacity": "107 (2-class) to 132 (high density)",
+      "Production Output": "80 units"
+    },
+    "story": "Like the 737-600, the A318 was a shortened version of a larger plane (the A319). It had the same wingspan and heavy landing gear, leading to poor fuel efficiency per seat. However, British Airways found a unique niche for the A318: they operated an all-business-class flight between London City and New York JFK. Because of London City's short runway and noise restrictions, the A318 had to be certified for steep-approach landings (5.5 degrees instead of the standard 3 degrees).",
+    "operators": [
+      {
+        "name": "Air France",
+        "status": "Active",
+        "desc": "Operates the type on short-range routes within Europe and France."
+      },
+      {
+        "name": "Tarom",
+        "status": "Active",
+        "desc": "The Romanian flag carrier flying regional flights across Eastern Europe."
+      },
+      {
+        "name": "British Airways",
+        "status": "Retired (2020)",
+        "desc": "Operated the all-business-class transatlantic flight between London City and New York."
+      }
+    ]
+  },
+  {
+    "id": "harrier",
+    "name": "AV-8B Harrier II",
+    "tag": "Vertical Hover Fighter",
+    "theme": "theme-military",
+    "summary": "A revolutionary V/STOL jet capable of vertical takeoffs, landings, and hovering using rotatable engine exhaust thrust nozzles.",
+    "image": "../images/harrier.jpg",
+    "specs": {
+      "Fuselage Length": "14.12 meters (46 ft 4 in)",
+      "Wingspan": "9.25 meters (30 ft 4 in)",
+      "Height": "3.55 meters (11 ft 8 in)",
+      "Engines": "1x Rolls-Royce Pegasus F402 vectored-thrust turbofan",
+      "Cruising Speed": "Mach 0.89 (1,083 km/h / Max Speed)",
+      "Maximum Range": "2,200 km (1,200 nmi)",
+      "Seating Capacity": "1 (Pilot)",
+      "Production Output": "337 units"
+    },
+    "story": "The AV-8B Harrier II was developed to provide close air support for marine ground forces without requiring standard runways. Utilizing the Pegasus engine, which directs exhaust thrust through four rotatable nozzles on the fuselage, the pilot can vector thrust downwards to hover, slide sideways, or take off vertically. This VTOL capability allowed it to operate from small helicopter carriers, amphibious assault ships, and forward operating bases in combat zones.",
+    "operators": [
+      {
+        "name": "United States Marine Corps",
+        "status": "Active",
+        "desc": "Employs the Harrier for close air support from assault ships and forward sites."
+      },
+      {
+        "name": "Spanish Navy",
+        "status": "Active",
+        "desc": "Operates the Harrier from their carrier, Juan Carlos I, for fleet defense."
+      },
+      {
+        "name": "Italian Navy",
+        "status": "Active",
+        "desc": "Deploys Harriers from their carrier, Cavour, for naval air support."
+      }
+    ]
+  },
+  {
+    "id": "747-400",
+    "name": "Boeing 747-400",
+    "tag": "Classic Queen of the Skies",
+    "theme": "theme-retro-orange",
+    "summary": "The most successful variant of the iconic 747 jumbo, featuring winglets, a glass cockpit, and defining long-haul travel for decades.",
+    "image": "../images/747sp.jpg",
+    "specs": {
+      "Fuselage Length": "70.66 meters (231 ft 10 in)",
+      "Wingspan": "64.44 meters (211 ft 5 in)",
+      "Height": "19.41 meters (63 ft 8 in)",
+      "Engines": "4x P&W PW4000 or GE CF6-80 or Rolls-Royce RB211",
+      "Cruising Speed": "Mach 0.855 (913 km/h)",
+      "Maximum Range": "13,490 km (7,285 nmi)",
+      "Seating Capacity": "416 (3-class) to 660 (high density)",
+      "Production Output": "694 units"
+    },
+    "story": "The 747-400 was the ultimate evolution of the humpbacked jumbo. Boeing updated the classic design by adding six-foot winglets, a two-crew glass cockpit (eliminating the flight engineer), and more efficient engines. It became the backbone of international long-haul travel, enabling airlines to cross oceans at high speeds with massive passenger volume. While passenger versions have been retired by major carriers in favor of twinjets, it continues to be a crucial workhorse for air cargo.",
+    "operators": [
+      {
+        "name": "Lufthansa",
+        "status": "Active (Passenger)",
+        "desc": "One of the last major airlines to continue flying the passenger -400 variant."
+      },
+      {
+        "name": "Atlas Air",
+        "status": "Active (Cargo)",
+        "desc": "Operates a large fleet of -400 freighters for worldwide global logistics."
+      },
+      {
+        "name": "Kalitta Air",
+        "status": "Active (Cargo)",
+        "desc": "Relies heavily on -400 cargo planes for international heavy air freight."
+      }
+    ]
+  },
+  {
+    "id": "a350-900ulr",
+    "name": "Airbus A350-900 ULR",
+    "tag": "First Ultra-Long Twinjet",
+    "theme": "theme-modern-luxury",
+    "summary": "The predecessor to the -1000ULR, designed to restart Singapore Airlines' legendary Singapore-to-Newark ultra-long-haul route.",
+    "image": "../images/a350-1000ulr.jpg",
+    "specs": {
+      "Fuselage Length": "66.8 meters (219 ft 2 in)",
+      "Wingspan": "64.75 meters (212 ft 5 in)",
+      "Height": "17.05 meters (55 ft 11 in)",
+      "Engines": "2x Rolls-Royce Trent XWB-84",
+      "Cruising Speed": "Mach 0.85 (903 km/h)",
+      "Maximum Range": "18,000 km (9,700 nmi)",
+      "Seating Capacity": "161 passengers (Premium layout)",
+      "Production Output": "7 units"
+    },
+    "story": "To restart its suspended direct flights from Singapore to New York (Newark), Singapore Airlines worked with Airbus to create the A350-900ULR. By sealing off part of the cargo hold and modifying the fuel system to hold an extra 24,000 liters, Airbus achieved a range of 9,700 nautical miles. The aircraft is configured in a low-density 161-seat layout (67 Business Class and 94 Premium Economy) to maximize passenger comfort and weight limits for the 18+ hour flight.",
+    "operators": [
+      {
+        "name": "Singapore Airlines",
+        "status": "Active",
+        "desc": "Utilizes the entire 7-unit fleet to fly nonstop flights to New York, San Francisco, and Los Angeles."
+      }
+    ]
   }
 ]
