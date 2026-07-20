@@ -1,7 +1,7 @@
 [build]
   publish = "."
 
-# Handle common spelling typos (/privet, /privete -> /private)
+# Handle common spelling typos (/privet, /privete -> /private/)
 [[redirects]]
   from = "/privet"
   to = "/private/"
@@ -21,21 +21,6 @@
   from = "/privete/*"
   to = "/private/:splat"
   status = 301
-
-# Block unauthenticated users (Role = "!*") from accessing /private
-[[redirects]]
-  from = "/private"
-  to = "/"
-  status = 302
-  force = true
-  conditions = {Role = ["!*"]}
-
-[[redirects]]
-  from = "/private/*"
-  to = "/"
-  status = 302
-  force = true
-  conditions = {Role = ["!*"]}
 
 # Server-side HTTP headers
 [[headers]]
