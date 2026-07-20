@@ -6,6 +6,29 @@ window.addEventListener('load', () => {
   buttons.forEach((btn, i) => setTimeout(() => btn.classList.add('visible'), i * 200));
 });
 
+// Secret click spot login modal handler
+document.addEventListener('DOMContentLoaded', () => {
+  const secretSpot = document.getElementById('secret-spot');
+  if (secretSpot) {
+    secretSpot.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.netlifyIdentity) {
+        const user = window.netlifyIdentity.currentUser();
+        if (user) {
+          window.location.href = 'private/';
+        } else {
+          window.netlifyIdentity.open('login');
+          window.netlifyIdentity.on('login', () => {
+            window.location.href = 'private/';
+          });
+        }
+      } else {
+        window.location.href = 'private/';
+      }
+    });
+  }
+});
+
 // Particle background
 const canvas = document.getElementById('bg');
 const ctx = canvas.getContext('2d');
