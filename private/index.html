@@ -3,11 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Private Portal - Spencer Allen</title>
+  <title>Admin Portal - Spencer Allen</title>
   <link rel="icon" href="https://avatars.githubusercontent.com/u/218202713?s=400&u=51caf98913829540eca74b7fa7ecb351ddd744bd&v=4" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    .admin-container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 30px;
+      background: rgba(10, 15, 25, 0.85);
+      border: 1px solid #00d4ff55;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.15);
+      text-align: left;
+    }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      .admin-grid { grid-template-columns: 1fr; }
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      color: #00d4ff;
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      box-sizing: border-box;
+      background: #050b14;
+      border: 1px solid #00d4ff44;
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #00d4ff;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+    }
+    .toolbar-btn {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid #00d4ff44;
+      color: #00d4ff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-right: 5px;
+      margin-bottom: 8px;
+      transition: 0.2s;
+    }
+    .toolbar-btn:hover {
+      background: #00d4ff;
+      color: #000;
+    }
+    .admin-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .admin-btn {
+      padding: 12px 22px;
+      border-radius: 25px;
+      background: #00d4ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 0.95rem;
+    }
+    .admin-btn:hover {
+      background: #66ffff;
+      box-shadow: 0 0 15px #66ffff;
+    }
+    .admin-btn.secondary {
+      background: transparent;
+      border: 1px solid #00d4ff;
+      color: #00d4ff;
+    }
+    .admin-btn.secondary:hover {
+      background: rgba(0, 212, 255, 0.2);
+    }
+    .admin-btn.danger {
+      background: #ff4444;
+      color: #fff;
+    }
+    .admin-btn.danger:hover {
+      background: #ff6666;
+      box-shadow: 0 0 15px #ff4444;
+    }
+    .post-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid #00d4ff22;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .post-item-title {
+      font-weight: bold;
+      color: #fff;
+    }
+    .post-item-date {
+      font-size: 0.85rem;
+      color: #00d4ff;
+    }
+    .preview-card {
+      background: rgba(5, 11, 20, 0.9);
+      border: 1px solid #00d4ff44;
+      border-radius: 12px;
+      padding: 20px;
+      color: #ddd;
+    }
+    .preview-card h3 {
+      color: #00d4ff;
+      margin-top: 0;
+    }
+    .status-toast {
+      padding: 10px 15px;
+      background: rgba(0, 212, 255, 0.2);
+      border: 1px solid #00d4ff;
+      border-radius: 8px;
+      color: #66ffff;
+      margin-top: 15px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -26,16 +164,96 @@
 </header>
 
 <div class="main-content" id="private-content">
-  <h2>Private Area</h2>
+  <h2>Admin Portal</h2>
   <p id="user-status">Authenticating session...</p>
   
-  <div class="buttons" id="auth-buttons" style="display: flex; justify-content: center; align-items: center; margin: 20px auto 30px auto; width: 100%;">
+  <div class="buttons" id="auth-buttons" style="display: flex; justify-content: center; align-items: center; margin: 10px auto 25px auto;">
     <a href="#" id="logout-btn" onclick="if(window.netlifyIdentity) netlifyIdentity.logout(); return false;" class="visible" style="display: inline-block;">Log Out</a>
   </div>
 
-  <div id="protected-data" style="display: none; margin-top: 30px; padding: 25px; border: 1px solid #00d4ff; border-radius: 15px; background: rgba(0,212,255,0.05); text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
-    <h3 style="color: #66ffff; margin-top: 0;">Authorized Access Only</h3>
-    <p>Welcome to the private section of spencerallen.me. This area is protected via Netlify access control rules.</p>
+  <div id="protected-data" style="display: none;">
+    <div class="admin-container">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #00d4ff33; padding-bottom: 15px; margin-bottom: 25px;">
+        <h3 style="color: #66ffff; margin: 0;">Blog Post Manager</h3>
+        <button class="admin-btn secondary" onclick="resetForm()">+ New Post</button>
+      </div>
+
+      <!-- Existing Posts List -->
+      <div style="margin-bottom: 30px;">
+        <h4 style="color: #00d4ff; margin-top: 0; margin-bottom: 12px;">Existing Blog Posts (<span id="post-count">0</span>)</h4>
+        <div id="posts-list-container" style="max-height: 200px; overflow-y: auto; padding-right: 5px;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Post Form and Live Preview -->
+      <div class="admin-grid">
+        <!-- Editor Form -->
+        <div>
+          <h4 style="color: #00d4ff; margin-top: 0; margin-bottom: 15px;" id="form-heading">Create / Edit Post</h4>
+          
+          <div class="form-group">
+            <label for="post-title">Post Title</label>
+            <input type="text" id="post-title" placeholder="e.g. My Next Tech Adventure" oninput="handleTitleInput()">
+          </div>
+
+          <div class="form-group">
+            <label for="post-id">Post ID (Slug)</label>
+            <input type="text" id="post-id" placeholder="e.g. my-next-tech-adventure" oninput="updatePreview()">
+          </div>
+
+          <div class="form-group">
+            <label for="post-date">Publication Date</label>
+            <input type="date" id="post-date" onchange="updatePreview()">
+          </div>
+
+          <div class="form-group">
+            <label for="post-excerpt">Excerpt (1-2 sentences)</label>
+            <textarea id="post-excerpt" rows="3" placeholder="Brief summary preview..." oninput="updatePreview()"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="post-content">Post Content (Markdown supported)</label>
+            <div>
+              <button type="button" class="toolbar-btn" onclick="insertFormatting('## ')">Heading</button>
+              <button type="button" class="toolbar-btn" onclick="insertFormatting('**', '**')">Bold</button>
+              <button type="button" class="toolbar-btn" onclick="insertFormatting('- ')">List</button>
+              <button type="button" class="toolbar-btn" onclick="insertFormatting('[Link Text](', ')')">Link</button>
+            </div>
+            <textarea id="post-content" rows="10" placeholder="Write your full post content here..." oninput="updatePreview()"></textarea>
+          </div>
+
+          <div class="admin-actions">
+            <button class="admin-btn" onclick="saveCurrentPost()">Save Post</button>
+            <button class="admin-btn secondary" onclick="resetForm()">Clear Form</button>
+          </div>
+        </div>
+
+        <!-- Live Preview -->
+        <div>
+          <h4 style="color: #00d4ff; margin-top: 0; margin-bottom: 15px;">Live Preview</h4>
+          <div class="preview-card">
+            <div style="font-size: 0.85rem; color: #00d4ff; margin-bottom: 8px;" id="preview-date">YYYY-MM-DD</div>
+            <h3 id="preview-title" style="margin-bottom: 12px;">Post Title</h3>
+            <div style="font-style: italic; color: #aaa; margin-bottom: 15px; border-left: 2px solid #00d4ff; padding-left: 10px;" id="preview-excerpt">Post excerpt preview...</div>
+            <div style="line-height: 1.6; white-space: pre-wrap;" id="preview-content">Post content will render here...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export Actions -->
+      <div style="margin-top: 35px; border-top: 1px solid #00d4ff33; padding-top: 25px;">
+        <h4 style="color: #66ffff; margin-top: 0; margin-bottom: 10px;">Publish & Export `posts.json`</h4>
+        <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 15px;">
+          When you finish adding or editing posts, click <strong>Download posts.json</strong> and replace <code>blog/posts.json</code> in your project repository!
+        </p>
+        <div class="admin-actions">
+          <button class="admin-btn" onclick="downloadPostsJson()">Download posts.json</button>
+          <button class="admin-btn secondary" onclick="copyPostsJson()">Copy JSON to Clipboard</button>
+        </div>
+        <div id="status-toast" class="status-toast"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -45,9 +263,15 @@
 
 <script src="../js/simple.js"></script>
 <script>
+  let blogPosts = [];
+  let editingIndex = -1;
+
   window.addEventListener('load', () => {
     const main = document.querySelector('.main-content');
     if (main) main.classList.add('visible');
+    
+    // Set default date to today
+    document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
   });
 
   if (window.netlifyIdentity) {
@@ -56,10 +280,12 @@
         window.location.href = "../";
       } else {
         updateUI(user);
+        loadPosts();
       }
     });
     window.netlifyIdentity.on("login", user => {
       updateUI(user);
+      loadPosts();
       window.netlifyIdentity.close();
     });
     window.netlifyIdentity.on("logout", () => {
@@ -85,6 +311,186 @@
     } else {
       window.location.href = "../";
     }
+  }
+
+  function loadPosts() {
+    fetch('../blog/posts.json')
+      .then(res => res.json())
+      .then(data => {
+        blogPosts = data;
+        renderPostsList();
+      })
+      .catch(err => {
+        console.warn('Could not load existing posts.json:', err);
+      });
+  }
+
+  function renderPostsList() {
+    const container = document.getElementById('posts-list-container');
+    document.getElementById('post-count').textContent = blogPosts.length;
+    container.innerHTML = '';
+
+    if (blogPosts.length === 0) {
+      container.innerHTML = '<div style="color: #888; font-style: italic;">No posts found.</div>';
+      return;
+    }
+
+    blogPosts.forEach((post, index) => {
+      const item = document.createElement('div');
+      item.className = 'post-item';
+      item.innerHTML = `
+        <div>
+          <div class="post-item-title">${escapeHtml(post.title)}</div>
+          <div class="post-item-date">${post.date} &bull; ID: <code>${post.id}</code></div>
+        </div>
+        <div>
+          <button class="toolbar-btn" onclick="editPost(${index})">Edit</button>
+          <button class="toolbar-btn" style="color: #ff6666; border-color: #ff666644;" onclick="deletePost(${index})">Delete</button>
+        </div>
+      `;
+      container.appendChild(item);
+    });
+  }
+
+  function handleTitleInput() {
+    const title = document.getElementById('post-title').value;
+    if (editingIndex === -1) {
+      const slug = title.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+      document.getElementById('post-id').value = slug;
+    }
+    updatePreview();
+  }
+
+  function insertFormatting(prefix, suffix = '') {
+    const textarea = document.getElementById('post-content');
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+    const selected = text.substring(start, end);
+    const replacement = prefix + selected + suffix;
+    textarea.value = text.substring(0, start) + replacement + text.substring(end);
+    textarea.focus();
+    textarea.selectionStart = start + prefix.length;
+    textarea.selectionEnd = start + prefix.length + selected.length;
+    updatePreview();
+  }
+
+  function updatePreview() {
+    const title = document.getElementById('post-title').value || 'Post Title';
+    const date = document.getElementById('post-date').value || 'YYYY-MM-DD';
+    const excerpt = document.getElementById('post-excerpt').value || 'Post excerpt preview...';
+    const content = document.getElementById('post-content').value || 'Post content will render here...';
+
+    document.getElementById('preview-title').textContent = title;
+    document.getElementById('preview-date').textContent = date;
+    document.getElementById('preview-excerpt').textContent = excerpt;
+    document.getElementById('preview-content').innerHTML = parseSimpleMarkdown(content);
+  }
+
+  function parseSimpleMarkdown(text) {
+    let html = escapeHtml(text);
+    html = html.replace(/^## (.*$)/gim, '<h3 style="color: #66ffff; margin-top: 15px; margin-bottom: 8px;">$1</h3>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" style="color: #00d4ff;">$1</a>');
+    return html;
+  }
+
+  function saveCurrentPost() {
+    const title = document.getElementById('post-title').value.trim();
+    const id = document.getElementById('post-id').value.trim();
+    const date = document.getElementById('post-date').value;
+    const excerpt = document.getElementById('post-excerpt').value.trim();
+    const content = document.getElementById('post-content').value.trim();
+
+    if (!title || !id || !excerpt || !content) {
+      showToast('Please fill out all fields before saving!', true);
+      return;
+    }
+
+    const postObj = { id, title, date, excerpt, content };
+
+    if (editingIndex >= 0) {
+      blogPosts[editingIndex] = postObj;
+      showToast(`Updated post "${title}" in local list!`);
+    } else {
+      blogPosts.unshift(postObj);
+      showToast(`Added new post "${title}" to local list!`);
+    }
+
+    renderPostsList();
+    resetForm();
+  }
+
+  function editPost(index) {
+    const post = blogPosts[index];
+    editingIndex = index;
+    document.getElementById('form-heading').textContent = `Edit Post #${index + 1}`;
+    document.getElementById('post-title').value = post.title;
+    document.getElementById('post-id').value = post.id;
+    document.getElementById('post-date').value = post.date;
+    document.getElementById('post-excerpt').value = post.excerpt;
+    document.getElementById('post-content').value = post.content;
+    updatePreview();
+  }
+
+  function deletePost(index) {
+    const post = blogPosts[index];
+    if (confirm(`Are you sure you want to delete "${post.title}"?`)) {
+      blogPosts.splice(index, 1);
+      renderPostsList();
+      if (editingIndex === index) resetForm();
+      showToast(`Deleted "${post.title}". Remember to download updated posts.json!`);
+    }
+  }
+
+  function resetForm() {
+    editingIndex = -1;
+    document.getElementById('form-heading').textContent = 'Create / Edit Post';
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-id').value = '';
+    document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+    document.getElementById('post-excerpt').value = '';
+    document.getElementById('post-content').value = '';
+    updatePreview();
+  }
+
+  function downloadPostsJson() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(blogPosts, null, 2));
+    const dlAnchorElem = document.createElement('a');
+    dlAnchorElem.setAttribute("href", dataStr);
+    dlAnchorElem.setAttribute("download", "posts.json");
+    document.body.appendChild(dlAnchorElem);
+    dlAnchorElem.click();
+    dlAnchorElem.remove();
+    showToast('Downloaded posts.json! Place this in your blog/ folder and push to GitHub.');
+  }
+
+  function copyPostsJson() {
+    const jsonText = JSON.stringify(blogPosts, null, 2);
+    navigator.clipboard.writeText(jsonText).then(() => {
+      showToast('Copied posts.json to clipboard!');
+    }).catch(err => {
+      showToast('Failed to copy to clipboard.', true);
+    });
+  }
+
+  function showToast(message, isError = false) {
+    const toast = document.getElementById('status-toast');
+    toast.style.display = 'block';
+    toast.style.borderColor = isError ? '#ff4444' : '#00d4ff';
+    toast.style.color = isError ? '#ff6666' : '#66ffff';
+    toast.textContent = message;
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 4000);
+  }
+
+  function escapeHtml(text) {
+    const escapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    return String(text).replace(/[&<>"']/g, char => escapeMap[char]);
   }
 </script>
 </body>
