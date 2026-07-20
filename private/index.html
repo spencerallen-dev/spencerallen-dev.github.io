@@ -10,7 +10,7 @@
   <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     .admin-container {
-      max-width: 900px;
+      max-width: 950px;
       margin: 30px auto;
       padding: 30px;
       background: rgba(10, 15, 25, 0.85);
@@ -91,6 +91,16 @@
       background: #66ffff;
       box-shadow: 0 0 15px #66ffff;
     }
+    .admin-btn.primary-publish {
+      background: linear-gradient(135deg, #00d4ff, #0088ff);
+      color: #fff;
+      font-size: 1.05rem;
+      padding: 14px 28px;
+    }
+    .admin-btn.primary-publish:hover {
+      box-shadow: 0 0 20px #00d4ff;
+      transform: translateY(-2px);
+    }
     .admin-btn.secondary {
       background: transparent;
       border: 1px solid #00d4ff;
@@ -98,14 +108,6 @@
     }
     .admin-btn.secondary:hover {
       background: rgba(0, 212, 255, 0.2);
-    }
-    .admin-btn.danger {
-      background: #ff4444;
-      color: #fff;
-    }
-    .admin-btn.danger:hover {
-      background: #ff6666;
-      box-shadow: 0 0 15px #ff4444;
     }
     .post-item {
       display: flex;
@@ -137,12 +139,13 @@
       margin-top: 0;
     }
     .status-toast {
-      padding: 10px 15px;
-      background: rgba(0, 212, 255, 0.2);
+      padding: 14px 18px;
+      background: rgba(0, 212, 255, 0.15);
       border: 1px solid #00d4ff;
-      border-radius: 8px;
+      border-radius: 10px;
       color: #66ffff;
-      margin-top: 15px;
+      margin-top: 20px;
+      font-weight: bold;
       display: none;
     }
   </style>
@@ -224,7 +227,7 @@
           </div>
 
           <div class="admin-actions">
-            <button class="admin-btn" onclick="saveCurrentPost()">Save Post</button>
+            <button class="admin-btn" onclick="saveCurrentPost()">Save Post to List</button>
             <button class="admin-btn secondary" onclick="resetForm()">Clear Form</button>
           </div>
         </div>
@@ -241,16 +244,19 @@
         </div>
       </div>
 
-      <!-- Export Actions -->
+      <!-- Instant 1-Click Publishing & Export Actions -->
       <div style="margin-top: 35px; border-top: 1px solid #00d4ff33; padding-top: 25px;">
-        <h4 style="color: #66ffff; margin-top: 0; margin-bottom: 10px;">Publish & Export `posts.json`</h4>
+        <h4 style="color: #66ffff; margin-top: 0; margin-bottom: 10px;">🚀 Publish Direct to GitHub & Netlify</h4>
         <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 15px;">
-          When you finish adding or editing posts, click <strong>Download posts.json</strong> and replace <code>blog/posts.json</code> in your project repository!
+          Press <strong>Publish Post Now</strong> to automatically push your changes directly to GitHub. Netlify will build and publish your blog post live in ~30 seconds!
         </p>
-        <div class="admin-actions">
-          <button class="admin-btn" onclick="downloadPostsJson()">Download posts.json</button>
-          <button class="admin-btn secondary" onclick="copyPostsJson()">Copy JSON to Clipboard</button>
+        <div class="admin-actions" style="align-items: center;">
+          <button class="admin-btn primary-publish" onclick="publishDirectToGitHub()">🚀 Publish Post Now</button>
+          <button class="admin-btn secondary" onclick="configureGitHubToken()">⚙️ Token Settings</button>
+          <button class="admin-btn secondary" onclick="downloadPostsJson()">Download posts.json</button>
+          <button class="admin-btn secondary" onclick="copyPostsJson()">Copy JSON</button>
         </div>
+        <div id="token-status" style="font-size: 0.85rem; color: #00d4ff; margin-top: 10px;"></div>
         <div id="status-toast" class="status-toast"></div>
       </div>
     </div>
@@ -272,6 +278,7 @@
     
     // Set default date to today
     document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+    updateTokenStatus();
   });
 
   if (window.netlifyIdentity) {
@@ -407,7 +414,7 @@
 
     if (!title || !id || !excerpt || !content) {
       showToast('Please fill out all fields before saving!', true);
-      return;
+      return false;
     }
 
     const postObj = { id, title, date, excerpt, content };
@@ -422,6 +429,7 @@
 
     renderPostsList();
     resetForm();
+    return true;
   }
 
   function editPost(index) {
@@ -442,7 +450,7 @@
       blogPosts.splice(index, 1);
       renderPostsList();
       if (editingIndex === index) resetForm();
-      showToast(`Deleted "${post.title}". Remember to download updated posts.json!`);
+      showToast(`Deleted "${post.title}". Click "Publish Post Now" to update GitHub!`);
     }
   }
 
@@ -457,6 +465,115 @@
     updatePreview();
   }
 
+  function updateTokenStatus() {
+    const token = localStorage.getItem('spencer_github_token');
+    const el = document.getElementById('token-status');
+    if (token) {
+      el.textContent = '✓ GitHub Access Token configured and active.';
+    } else {
+      el.textContent = 'ℹ No GitHub token saved yet. Clicking "Publish Post Now" will prompt you for your one-time token.';
+    }
+  }
+
+  function configureGitHubToken() {
+    const existing = localStorage.getItem('spencer_github_token') || '';
+    const input = prompt("Enter your GitHub Personal Access Token (with contents:write scope for spencerallen-dev.github.io):", existing);
+    if (input !== null) {
+      if (input.trim() === '') {
+        localStorage.removeItem('spencer_github_token');
+        showToast('GitHub Token cleared.');
+      } else {
+        localStorage.setItem('spencer_github_token', input.trim());
+        showToast('GitHub Token saved!');
+      }
+      updateTokenStatus();
+    }
+  }
+
+  async function publishDirectToGitHub() {
+    // Check if form has unsaved work
+    const currentTitle = document.getElementById('post-title').value.trim();
+    if (currentTitle) {
+      const saved = saveCurrentPost();
+      if (!saved) return;
+    }
+
+    if (blogPosts.length === 0) {
+      showToast('No blog posts to publish!', true);
+      return;
+    }
+
+    let token = localStorage.getItem('spencer_github_token');
+    if (!token) {
+      token = prompt("Enter your GitHub Personal Access Token (with contents:write permission for spencerallen-dev.github.io):");
+      if (!token) return;
+      token = token.trim();
+      localStorage.setItem('spencer_github_token', token);
+      updateTokenStatus();
+    }
+
+    showToast('Connecting to GitHub API...', false);
+
+    const owner = 'spencerallen-dev';
+    const repo = 'spencerallen-dev.github.io';
+    const path = 'blog/posts.json';
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+    try {
+      // 1. Get file SHA
+      const getRes = await fetch(apiUrl, {
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+
+      if (getRes.status === 401 || getRes.status === 403) {
+        localStorage.removeItem('spencer_github_token');
+        updateTokenStatus();
+        showToast('Invalid GitHub Token. Token cleared. Please try again.', true);
+        return;
+      }
+
+      let sha = '';
+      if (getRes.ok) {
+        const fileData = await getRes.json();
+        sha = fileData.sha;
+      }
+
+      // 2. Base64 encode JSON
+      const jsonString = JSON.stringify(blogPosts, null, 2);
+      const encodedContent = btoa(unescape(encodeURIComponent(jsonString)));
+
+      const lastPost = blogPosts[0];
+      const commitMsg = `Publish blog post "${lastPost ? lastPost.title : 'Updated posts'}" via Admin Portal`;
+
+      // 3. Put updated file
+      const putRes = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: commitMsg,
+          content: encodedContent,
+          sha: sha
+        })
+      });
+
+      if (putRes.ok) {
+        showToast('🚀 SUCCESS! Blog post committed to GitHub. Netlify is deploying your site live now (~30s)!');
+      } else {
+        const errData = await putRes.json();
+        showToast(`Error publishing: ${errData.message || 'Check GitHub token permissions'}`, true);
+      }
+    } catch (err) {
+      showToast(`Network error: ${err.message}`, true);
+    }
+  }
+
   function downloadPostsJson() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(blogPosts, null, 2));
     const dlAnchorElem = document.createElement('a');
@@ -465,7 +582,7 @@
     document.body.appendChild(dlAnchorElem);
     dlAnchorElem.click();
     dlAnchorElem.remove();
-    showToast('Downloaded posts.json! Place this in your blog/ folder and push to GitHub.');
+    showToast('Downloaded posts.json!');
   }
 
   function copyPostsJson() {
@@ -483,9 +600,11 @@
     toast.style.borderColor = isError ? '#ff4444' : '#00d4ff';
     toast.style.color = isError ? '#ff6666' : '#66ffff';
     toast.textContent = message;
-    setTimeout(() => {
-      toast.style.display = 'none';
-    }, 4000);
+    if (!isError) {
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 6000);
+    }
   }
 
   function escapeHtml(text) {
