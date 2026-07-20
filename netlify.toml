@@ -1,0 +1,23 @@
+[build]
+  publish = "."
+
+# Access control: Only users with Netlify Identity roles (admin, user) can view /private
+[[redirects]]
+  from = "/private/*"
+  to = "/private/:splat"
+  status = 200
+  conditions = {Role = ["admin", "user"]}
+
+# Fallback: Redirect unauthenticated requests away from /private to homepage
+[[redirects]]
+  from = "/private/*"
+  to = "/"
+  status = 302
+
+# Server-side HTTP headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

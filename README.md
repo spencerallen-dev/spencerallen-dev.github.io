@@ -36,7 +36,7 @@ Personal website for Spencer Allen - A modern, animated portfolio site with a cy
 - Dark theme with cyan accents
 - Smooth fade-in animations
 - Blog with dynamic post loading
-- GitHub Pages deployment
+- Netlify deployment
 
 ## Adding New Blog Posts
 
@@ -127,7 +127,7 @@ The blog system uses a simple JSON file to manage all posts. No HTML editing req
    
    1. **Check JSON syntax**: Use a JSON validator (like https://jsonlint.com) to ensure there are no syntax errors
    2. **Preview locally**: If running a local server, refresh the blog page
-   3. **Check on GitHub Pages**: After committing and pushing, wait a minute for GitHub Pages to rebuild
+   3. **Check on Netlify**: After committing and pushing, wait a minute for Netlify to rebuild
 
 #### 6. **Common mistakes to avoid**
 

@@ -73,6 +73,12 @@ nav a:hover {
   animation: glow 1.5s infinite alternate;
 }
 
+.main-content h2 a.secret-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .main-content p {
   font-size: 1.2rem;
   margin-bottom: 30px;
