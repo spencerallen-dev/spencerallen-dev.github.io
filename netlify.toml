@@ -1,18 +1,32 @@
 [build]
   publish = "."
 
-# Access control: Only users with Netlify Identity roles (admin, user) can view /private
+# Forced Role-based access for authenticated users with 'admin' or 'user' role
+[[redirects]]
+  from = "/private"
+  to = "/private/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/private/*"
   to = "/private/:splat"
   status = 200
+  force = true
   conditions = {Role = ["admin", "user"]}
 
-# Fallback: Redirect unauthenticated requests away from /private to homepage
+# Unauthenticated Fallback: Forced server-side redirect to homepage for unauthenticated requests
+[[redirects]]
+  from = "/private"
+  to = "/"
+  status = 302
+  force = true
+
 [[redirects]]
   from = "/private/*"
   to = "/"
   status = 302
+  force = true
 
 # Server-side HTTP headers
 [[headers]]

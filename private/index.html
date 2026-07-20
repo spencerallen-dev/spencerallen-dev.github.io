@@ -53,21 +53,24 @@
 
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", user => {
-      updateUI(user);
+      if (!user) {
+        window.location.href = "../";
+      } else {
+        updateUI(user);
+      }
     });
     window.netlifyIdentity.on("login", user => {
       updateUI(user);
       window.netlifyIdentity.close();
     });
     window.netlifyIdentity.on("logout", () => {
-      updateUI(null);
+      window.location.href = "../";
     });
   }
 
   function updateUI(user) {
     const status = document.getElementById('user-status');
     const authBtns = document.getElementById('auth-buttons');
-    const loginBtn = document.getElementById('login-btn');
     const logoutBtn = document.getElementById('logout-btn');
     const data = document.getElementById('protected-data');
 
@@ -75,20 +78,13 @@
 
     if (user) {
       status.textContent = `Welcome back, ${user.user_metadata?.full_name || user.email}!`;
-      if (loginBtn) loginBtn.style.display = 'none';
       if (logoutBtn) {
         logoutBtn.style.display = 'inline-block';
         logoutBtn.classList.add('visible');
       }
       if (data) data.style.display = 'block';
     } else {
-      status.textContent = 'Access Restricted: Please log in to view this section.';
-      if (loginBtn) {
-        loginBtn.style.display = 'inline-block';
-        loginBtn.classList.add('visible');
-      }
-      if (logoutBtn) logoutBtn.style.display = 'none';
-      if (data) data.style.display = 'none';
+      window.location.href = "../";
     }
   }
 </script>
