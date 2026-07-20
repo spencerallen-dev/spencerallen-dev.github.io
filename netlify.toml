@@ -1,32 +1,20 @@
 [build]
   publish = "."
 
-# Forced Role-based access for authenticated users with 'admin' or 'user' role
-[[redirects]]
-  from = "/private"
-  to = "/private/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/private/*"
-  to = "/private/:splat"
-  status = 200
-  force = true
-  conditions = {Role = ["admin", "user"]}
-
-# Unauthenticated Fallback: Forced server-side redirect to homepage for unauthenticated requests
+# Protect /private route: Redirect users WITHOUT 'admin' or 'user' roles to homepage
 [[redirects]]
   from = "/private"
   to = "/"
   status = 302
   force = true
+  conditions = {Role = ["!admin", "!user"]}
 
 [[redirects]]
   from = "/private/*"
   to = "/"
   status = 302
   force = true
+  conditions = {Role = ["!admin", "!user"]}
 
 # Server-side HTTP headers
 [[headers]]
