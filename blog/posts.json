@@ -1,5 +1,12 @@
 [
   {
+    "id": "testing-the-new-blog-system",
+    "title": "testing the new blog system",
+    "date": "2026-07-20",
+    "excerpt": "my new blog posting system",
+    "content": "so me and gemini made a blog posting system so it will make it easier to post"
+  },
+  {
     "id": "renewed-website-proton-privacy",
     "title": "A Year of Growth & Privacy: Website Renewal & Switching to Proton",
     "date": "2026-06-21",
