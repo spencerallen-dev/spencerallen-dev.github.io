@@ -20,6 +20,7 @@ if (canvas) {
     updateObstacleBoxes();
   }
   window.addEventListener('resize', resize);
+  window.addEventListener('load', resize);
 
   function updateObstacleBoxes() {
     const selectors = [

@@ -51,7 +51,7 @@ canvas#bg {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -118,6 +118,17 @@ nav a:hover {
   background: var(--card-bg);
   box-shadow: var(--glow-shadow);
   transform: scale(1.05);
+}
+
+.main-content,
+#about,
+.blog-container,
+.games-items,
+.tech-items,
+.about-items,
+.aviation-container {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 .main-content {
