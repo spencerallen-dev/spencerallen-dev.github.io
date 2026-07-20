@@ -1,20 +1,41 @@
 [build]
   publish = "."
 
-# Protect /private route: Redirect users WITHOUT 'admin' or 'user' roles to homepage
+# Handle common spelling typos (/privet, /privete -> /private)
+[[redirects]]
+  from = "/privet"
+  to = "/private/"
+  status = 301
+
+[[redirects]]
+  from = "/privet/*"
+  to = "/private/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/privete"
+  to = "/private/"
+  status = 301
+
+[[redirects]]
+  from = "/privete/*"
+  to = "/private/:splat"
+  status = 301
+
+# Block unauthenticated users (Role = "!*") from accessing /private
 [[redirects]]
   from = "/private"
   to = "/"
   status = 302
   force = true
-  conditions = {Role = ["!admin", "!user"]}
+  conditions = {Role = ["!*"]}
 
 [[redirects]]
   from = "/private/*"
   to = "/"
   status = 302
   force = true
-  conditions = {Role = ["!admin", "!user"]}
+  conditions = {Role = ["!*"]}
 
 # Server-side HTTP headers
 [[headers]]
