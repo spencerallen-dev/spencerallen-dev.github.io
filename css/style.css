@@ -1,13 +1,48 @@
+:root {
+  --bg-color: #000000;
+  --text-color: #00d4ff;
+  --text-body: #00d4ff;
+  --text-secondary: #66ffff;
+  --card-bg: rgba(0, 212, 255, 0.08);
+  --card-border: #00d4ff;
+  --card-hover-bg: rgba(0, 212, 255, 0.18);
+  --header-bg: rgba(0, 0, 0, 0.85);
+  --footer-bg: rgba(0, 0, 0, 0.85);
+  --particle-color: #00d4ff;
+  --button-bg: #00d4ff;
+  --button-text: #000000;
+  --button-hover: #66ffff;
+  --glow-shadow: 0 0 15px #00d4ff;
+}
+
+[data-theme="light"] {
+  --bg-color: #f0f4f8;
+  --text-color: #0066cc;
+  --text-body: #1e293b;
+  --text-secondary: #004488;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: #0066cc;
+  --card-hover-bg: #ffffff;
+  --header-bg: rgba(240, 244, 248, 0.92);
+  --footer-bg: rgba(240, 244, 248, 0.92);
+  --particle-color: #0066cc;
+  --button-bg: #0066cc;
+  --button-text: #ffffff;
+  --button-hover: #0088ff;
+  --glow-shadow: 0 4px 18px rgba(0, 102, 204, 0.25);
+}
+
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background-color: #000;
-  color: #00d4ff;
+  background-color: var(--bg-color);
+  color: var(--text-body);
   overflow-x: hidden;
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 canvas#bg {
@@ -25,24 +60,33 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background-color: rgba(0,0,0,0.8);
+  background-color: var(--header-bg);
   position: sticky;
   top: 0;
   z-index: 10;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--card-bg);
+  transition: background-color 0.4s ease;
 }
 
 header h1 {
   margin: 0;
   font-size: 1.8rem;
+  color: var(--text-color);
   transition: 0.3s;
 }
 
 header h1:hover {
-  text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff;
+  text-shadow: var(--glow-shadow);
+}
+
+nav {
+  display: flex;
+  align-items: center;
 }
 
 nav a {
-  color: #00d4ff;
+  color: var(--text-color);
   text-decoration: none;
   margin-left: 20px;
   font-weight: bold;
@@ -50,8 +94,30 @@ nav a {
 }
 
 nav a:hover {
-  color: #66ffff;
-  text-shadow: 0 0 10px #66ffff;
+  color: var(--text-secondary);
+  text-shadow: 0 0 10px var(--text-secondary);
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  border-radius: 20px;
+  padding: 6px 14px;
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--card-bg);
+  box-shadow: var(--glow-shadow);
+  transform: scale(1.05);
 }
 
 .main-content {
@@ -71,6 +137,7 @@ nav a:hover {
 .main-content h2 {
   font-size: 2.5rem;
   margin-bottom: 10px;
+  color: var(--text-color);
   animation: glow 1.5s infinite alternate;
 }
 
@@ -83,6 +150,7 @@ nav a:hover {
 .main-content p {
   font-size: 1.2rem;
   margin-bottom: 30px;
+  color: var(--text-body);
 }
 
 .buttons a {
@@ -90,8 +158,8 @@ nav a:hover {
   margin: 10px;
   padding: 12px 25px;
   border-radius: 25px;
-  background-color: #00d4ff;
-  color: #000;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
@@ -106,24 +174,25 @@ nav a:hover {
 }
 
 .buttons a:hover {
-  background-color: #66ffff;
-  box-shadow: 0 0 15px #66ffff, 0 0 30px #00d4ff;
+  background-color: var(--button-hover);
+  box-shadow: var(--glow-shadow);
 }
 
 footer {
   width: 100%;
   text-align: center;
   padding: 10px 0;
-  background-color: rgba(0,0,0,0.85);
-  border-top: 1px solid #00d4ff33;
+  background-color: var(--footer-bg);
+  border-top: 1px solid var(--card-bg);
   font-size: 0.9rem;
   position: fixed;
   bottom: 0;
   left: 0;
+  transition: background-color 0.4s ease;
 }
 
 footer a {
-  color: #00d4ff;
+  color: var(--text-color);
   margin: 0 10px;
   text-decoration: none;
   font-weight: bold;
@@ -131,11 +200,11 @@ footer a {
 }
 
 footer a:hover {
-  color: #66ffff;
-  text-shadow: 0 0 10px #66ffff;
+  color: var(--text-secondary);
+  text-shadow: 0 0 10px var(--text-secondary);
 }
 
 @keyframes glow {
-  0% { text-shadow: 0 0 5px #00d4ff, 0 0 10px #00d4ff; }
-  100% { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff; }
+  0% { text-shadow: 0 0 5px var(--text-color), 0 0 10px var(--text-color); }
+  100% { text-shadow: 0 0 20px var(--text-color), 0 0 30px var(--text-color); }
 }

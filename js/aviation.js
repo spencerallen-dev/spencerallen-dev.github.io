@@ -108,7 +108,7 @@ if (canvas) {
     }
 
     ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#00d4ff';
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim() || '#00d4ff';
     
     ctx.beginPath();
     for (let i = 0; i < particles.length; i++) {

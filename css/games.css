@@ -11,32 +11,34 @@
 }
 
 .game-card {
-  background-color: rgba(0, 212, 255, 0.1);
-  border: 1px solid #00d4ff;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 15px;
   padding: 40px;
   width: 450px;
   min-height: 200px;
   transition: 0.3s;
+  color: var(--text-body);
 }
 
 .game-card:hover {
-  background-color: rgba(0, 212, 255, 0.2);
-  box-shadow: 0 0 20px #00d4ff;
+  background-color: var(--card-hover-bg);
+  box-shadow: var(--glow-shadow);
 }
 
 .game-card h3 {
   margin-top: 0;
   margin-bottom: 15px;
   font-size: 2rem;
+  color: var(--text-color);
 }
 
 .game-card p {
   font-size: 1.1rem;
   line-height: 1.6;
+  color: var(--text-body);
 }
 
-/* Override global footer styles to position at bottom of content instead of viewport */
 footer {
   position: relative;
   margin-top: auto;
