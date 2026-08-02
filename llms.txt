@@ -1,0 +1,18 @@
+# Spencer Allen
+
+> Personal website, blog, and developer portfolio for Spencer Allen.
+
+Student, developer, and tech enthusiast based in Brisbane, Australia. 
+
+## Main Pages
+
+- [Home](https://spencerallen.me/): Spencer Allen's portfolio landing page.
+- [About](https://spencerallen.me/about/): Personal background, bio, and interests.
+- [Tech](https://spencerallen.me/tech/): Technology projects, coding, and web applications.
+- [Games](https://spencerallen.me/games/): Interactive web games and gaming projects.
+- [Blog](https://spencerallen.me/blog/): Articles, blog posts, and tech write-ups.
+- [Aviation](https://spencerallen.me/aviation/): Aviation data, aircraft lists, and flight tracking info.
+
+## Social & Links
+
+- [GitHub](https://github.com/spencerallen-dev): Open source code and GitHub profile.
