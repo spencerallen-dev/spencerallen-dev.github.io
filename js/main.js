@@ -6,8 +6,11 @@ window.addEventListener('load', () => {
   buttons.forEach((btn, i) => setTimeout(() => btn.classList.add('visible'), i * 200));
 });
 
-// Secret click spot login modal handler
+// Secret click spot login modal handler & Visitor logging
 document.addEventListener('DOMContentLoaded', () => {
+  // Trigger visitor IP logger silently in background
+  fetch('/.netlify/functions/log-ip').catch(() => {});
+
   const secretSpot = document.getElementById('secret-spot');
   if (secretSpot) {
     secretSpot.addEventListener('click', (e) => {

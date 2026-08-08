@@ -1,5 +1,6 @@
 [build]
   publish = "."
+  functions = "netlify/functions"
 
 # Handle common spelling typos (/privet, /privete -> /private/)
 [[redirects]]
