@@ -49,6 +49,7 @@ export async function handler(event, context) {
     { name: '🌐 Language / Timezone', value: `${clientData.language || acceptLanguage} (${clientData.timeZone || 'UTC'})`, inline: true },
     { name: '⚡ CPU Cores / RAM', value: `${clientData.cores || 'N/A'} / ${clientData.memory || 'N/A'}`, inline: true },
     { name: '📶 Network Connection', value: clientData.connection || 'N/A', inline: true },
+    { name: '⏱️ Load Latency (TTFB)', value: clientData.latency || 'N/A', inline: true },
     { name: '🎨 Theme / Touch', value: `${clientData.colorScheme || 'N/A'} (${clientData.touchPoints || 0} touch pts)`, inline: true },
     { name: '🕒 Timestamp (UTC)', value: timestamp, inline: true },
     { name: '🔍 User-Agent', value: `\`\`\`${userAgent}\`\`\`` }

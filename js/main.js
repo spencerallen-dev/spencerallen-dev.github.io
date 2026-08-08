@@ -10,6 +10,30 @@ window.addEventListener('load', () => {
 document.addEventListener('DOMContentLoaded', () => {
   // Collect comprehensive visitor client telemetry
   try {
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    let connectionStr = 'N/A';
+    if (conn) {
+      const typeStr = conn.type && conn.type !== 'unknown' ? conn.type : null;
+      const effType = conn.effectiveType ? (conn.effectiveType === '4g' ? 'High-Speed (4G/Wi-Fi/Fiber)' : conn.effectiveType.toUpperCase()) : null;
+      const speed = conn.downlink ? `~${conn.downlink} Mbps` : null;
+      const rtt = conn.rtt ? `${conn.rtt}ms RTT` : null;
+      const saveData = conn.saveData ? 'SaveData: On' : null;
+
+      const details = [typeStr, effType, speed, rtt, saveData].filter(Boolean);
+      connectionStr = details.length > 0 ? details.join(' • ') : 'N/A';
+    }
+
+    let latencyStr = 'N/A';
+    if (window.performance && window.performance.getEntriesByType) {
+      const navEntries = window.performance.getEntriesByType('navigation');
+      if (navEntries.length > 0) {
+        const entry = navEntries[0];
+        const ttfb = Math.round(entry.responseStart - entry.requestStart);
+        const dns = Math.round(entry.domainLookupEnd - entry.domainLookupStart);
+        latencyStr = `TTFB: ${ttfb}ms • DNS: ${dns}ms`;
+      }
+    }
+
     const telemetry = {
       url: window.location.href,
       path: window.location.pathname,
@@ -22,7 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
       platform: (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || 'Unknown',
       cores: navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} cores` : 'N/A',
       memory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A',
-      connection: navigator.connection ? `${navigator.connection.effectiveType || 'N/A'} (SaveData: ${navigator.connection.saveData ? 'On' : 'Off'})` : 'N/A',
+      connection: connectionStr,
+      latency: latencyStr,
       colorScheme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light',
       touchPoints: navigator.maxTouchPoints || 0
     };
