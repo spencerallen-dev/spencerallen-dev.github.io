@@ -6,10 +6,36 @@ window.addEventListener('load', () => {
   buttons.forEach((btn, i) => setTimeout(() => btn.classList.add('visible'), i * 200));
 });
 
-// Secret click spot login modal handler & Visitor logging
+// Secret click spot login modal handler & Visitor telemetry
 document.addEventListener('DOMContentLoaded', () => {
-  // Trigger visitor IP logger silently in background
-  fetch('/.netlify/functions/log-ip').catch(() => {});
+  // Collect comprehensive visitor client telemetry
+  try {
+    const telemetry = {
+      url: window.location.href,
+      path: window.location.pathname,
+      title: document.title,
+      referrer: document.referrer || 'Direct / None',
+      screenResolution: `${window.screen.width}x${window.screen.height}`,
+      viewport: `${window.innerWidth}x${window.innerHeight}`,
+      language: navigator.language || (navigator.languages && navigator.languages[0]) || 'Unknown',
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
+      platform: (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || 'Unknown',
+      cores: navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} cores` : 'N/A',
+      memory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A',
+      connection: navigator.connection ? `${navigator.connection.effectiveType || 'N/A'} (SaveData: ${navigator.connection.saveData ? 'On' : 'Off'})` : 'N/A',
+      colorScheme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light',
+      touchPoints: navigator.maxTouchPoints || 0
+    };
+
+    fetch('/.netlify/functions/log-ip', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(telemetry)
+    }).catch(() => {});
+  } catch (e) {
+    // Fallback silent trigger
+    fetch('/.netlify/functions/log-ip').catch(() => {});
+  }
 
   const secretSpot = document.getElementById('secret-spot');
   if (secretSpot) {
