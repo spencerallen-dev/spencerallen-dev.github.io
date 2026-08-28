@@ -15,23 +15,6 @@
   --glow-shadow: 0 0 15px #00d4ff;
 }
 
-[data-theme="light"] {
-  --bg-color: #f0f4f8;
-  --text-color: #0066cc;
-  --text-body: #1e293b;
-  --text-secondary: #004488;
-  --card-bg: rgba(255, 255, 255, 0.88);
-  --card-border: #0066cc;
-  --card-hover-bg: #ffffff;
-  --header-bg: rgba(240, 244, 248, 0.92);
-  --footer-bg: rgba(240, 244, 248, 0.92);
-  --particle-color: #0066cc;
-  --button-bg: #0066cc;
-  --button-text: #ffffff;
-  --button-hover: #0088ff;
-  --glow-shadow: 0 4px 18px rgba(0, 102, 204, 0.25);
-}
-
 body, html {
   margin: 0;
   padding: 0;
@@ -98,35 +81,13 @@ nav a:hover {
   text-shadow: 0 0 10px var(--text-secondary);
 }
 
-.theme-toggle-btn {
-  background: transparent;
-  border: 1px solid var(--text-color);
-  color: var(--text-color);
-  border-radius: 20px;
-  padding: 6px 14px;
-  margin-left: 20px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s ease;
-  font-weight: bold;
-}
-
-.theme-toggle-btn:hover {
-  background: var(--card-bg);
-  box-shadow: var(--glow-shadow);
-  transform: scale(1.05);
-}
-
 .main-content,
 #about,
 .blog-container,
 .games-items,
 .tech-items,
 .about-items,
-.aviation-container {
+.hosting-container {
   background: transparent !important;
   background-color: transparent !important;
 }
@@ -150,12 +111,6 @@ nav a:hover {
   margin-bottom: 10px;
   color: var(--text-color);
   animation: glow 1.5s infinite alternate;
-}
-
-.main-content h2 a.secret-link {
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 .main-content p {

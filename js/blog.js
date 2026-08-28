@@ -31,7 +31,11 @@ if (canvas) {
       '.game-card',
       '.tech-card',
       '.admin-container',
-      '.aviation-container',
+      '.hosting-container',
+      '.spec-card',
+      '.game-hosting-card',
+      '.support-card',
+      '.multi-instance-box',
       'header'
     ];
     cachedBoxes = [];

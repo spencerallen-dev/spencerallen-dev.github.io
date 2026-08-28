@@ -2,85 +2,8 @@
 window.addEventListener('load', () => {
   const main = document.querySelector('.main-content');
   const buttons = document.querySelectorAll('.buttons a');
-  main.classList.add('visible');
+  if (main) main.classList.add('visible');
   buttons.forEach((btn, i) => setTimeout(() => btn.classList.add('visible'), i * 200));
-});
-
-// Secret click spot login modal handler & Visitor telemetry
-document.addEventListener('DOMContentLoaded', () => {
-  // Collect comprehensive visitor client telemetry
-  try {
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    let connectionStr = 'N/A';
-    if (conn) {
-      const typeStr = conn.type && conn.type !== 'unknown' ? conn.type : null;
-      const effType = conn.effectiveType ? (conn.effectiveType === '4g' ? 'High-Speed (4G/Wi-Fi/Fiber)' : conn.effectiveType.toUpperCase()) : null;
-      const speed = conn.downlink ? `~${conn.downlink} Mbps` : null;
-      const rtt = conn.rtt ? `${conn.rtt}ms RTT` : null;
-      const saveData = conn.saveData ? 'SaveData: On' : null;
-
-      const details = [typeStr, effType, speed, rtt, saveData].filter(Boolean);
-      connectionStr = details.length > 0 ? details.join(' • ') : 'N/A';
-    }
-
-    let latencyStr = 'N/A';
-    if (window.performance && window.performance.getEntriesByType) {
-      const navEntries = window.performance.getEntriesByType('navigation');
-      if (navEntries.length > 0) {
-        const entry = navEntries[0];
-        const ttfb = Math.round(entry.responseStart - entry.requestStart);
-        const dns = Math.round(entry.domainLookupEnd - entry.domainLookupStart);
-        latencyStr = `TTFB: ${ttfb}ms • DNS: ${dns}ms`;
-      }
-    }
-
-    const telemetry = {
-      url: window.location.href,
-      path: window.location.pathname,
-      title: document.title,
-      referrer: document.referrer || 'Direct / None',
-      screenResolution: `${window.screen.width}x${window.screen.height}`,
-      viewport: `${window.innerWidth}x${window.innerHeight}`,
-      language: navigator.language || (navigator.languages && navigator.languages[0]) || 'Unknown',
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
-      platform: (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || 'Unknown',
-      cores: navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} cores` : 'N/A',
-      memory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A',
-      connection: connectionStr,
-      latency: latencyStr,
-      colorScheme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light',
-      touchPoints: navigator.maxTouchPoints || 0
-    };
-
-    fetch('/.netlify/functions/log-ip', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(telemetry)
-    }).catch(() => {});
-  } catch (e) {
-    // Fallback silent trigger
-    fetch('/.netlify/functions/log-ip').catch(() => {});
-  }
-
-  const secretSpot = document.getElementById('secret-spot');
-  if (secretSpot) {
-    secretSpot.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (window.netlifyIdentity) {
-        const user = window.netlifyIdentity.currentUser();
-        if (user) {
-          window.location.href = 'private/';
-        } else {
-          window.netlifyIdentity.open('login');
-          window.netlifyIdentity.on('login', () => {
-            window.location.href = 'private/';
-          });
-        }
-      } else {
-        window.location.href = 'private/';
-      }
-    });
-  }
 });
 
 // Particle background with text box avoidance physics
@@ -110,7 +33,11 @@ if (canvas) {
       '.game-card',
       '.tech-card',
       '.admin-container',
-      '.aviation-container',
+      '.hosting-container',
+      '.spec-card',
+      '.game-hosting-card',
+      '.support-card',
+      '.multi-instance-box',
       'header'
     ];
     cachedBoxes = [];

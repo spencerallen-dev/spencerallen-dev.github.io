@@ -11,7 +11,7 @@ Student, developer, and tech enthusiast based in Brisbane, Australia.
 - [Tech](https://spencerallen.me/tech/): Technology projects, coding, and web applications.
 - [Games](https://spencerallen.me/games/): Interactive web games and gaming projects.
 - [Blog](https://spencerallen.me/blog/): Articles, blog posts, and tech write-ups.
-- [Aviation](https://spencerallen.me/aviation/): Aviation data, aircraft lists, and flight tracking info.
+- [Hosting](https://spencerallen.me/hosting/): Home server game hosting capabilities, specs, and supported dedicated servers.
 
 ## Social & Links
 
