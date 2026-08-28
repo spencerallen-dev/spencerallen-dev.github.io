@@ -4,136 +4,85 @@ window.addEventListener('load', () => {
   main.classList.add('visible');
 });
 
-// Particle background with text box avoidance physics
+// Particle background - Dense ambient glowing blue dots across the entire screen
 const canvas = document.getElementById('bg');
 if (canvas) {
   const ctx = canvas.getContext('2d');
   let particles = [];
   let w, h;
   let animId = null;
-  let cachedBoxes = [];
-  let lastBoxUpdate = 0;
 
   function resize() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
-    updateObstacleBoxes();
+    initParticles();
   }
   window.addEventListener('resize', resize);
   window.addEventListener('load', resize);
 
-  function updateObstacleBoxes() {
-    const selectors = [
-      '.main-content',
-      '.blog-container',
-      '.blog-post',
-      '.post-content',
-      '.game-card',
-      '.tech-card',
-      '.admin-container',
-      '.hosting-container',
-      '.spec-card',
-      '.game-hosting-card',
-      '.support-card',
-      '.multi-instance-box',
-      'header'
-    ];
-    cachedBoxes = [];
-    selectors.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-          cachedBoxes.push({
-            left: rect.left,
-            right: rect.right,
-            top: rect.top,
-            bottom: rect.bottom
-          });
-        }
-      });
-    });
-  }
-
-  window.addEventListener('scroll', updateObstacleBoxes, { passive: true });
-
   class Particle {
     constructor() {
-      this.reset();
+      this.reset(true);
     }
-    reset() {
+    reset(initial = false) {
       this.x = Math.random() * (w || window.innerWidth);
-      this.y = Math.random() * (h || window.innerHeight);
-      this.vx = (Math.random() - 0.5) * 0.8;
-      this.vy = (Math.random() - 0.5) * 0.8;
-      this.size = Math.random() * 2 + 1;
-      this.avoidBoxes();
-    }
-    avoidBoxes() {
-      const padding = 10;
-      for (let i = 0; i < cachedBoxes.length; i++) {
-        const b = cachedBoxes[i];
-        if (this.x > b.left - padding && this.x < b.right + padding &&
-            this.y > b.top - padding && this.y < b.bottom + padding) {
-          
-          const distLeft = Math.abs(this.x - (b.left - padding));
-          const distRight = Math.abs(this.x - (b.right + padding));
-          const distTop = Math.abs(this.y - (b.top - padding));
-          const distBottom = Math.abs(this.y - (b.bottom + padding));
-
-          const minDist = Math.min(distLeft, distRight, distTop, distBottom);
-
-          if (minDist === distLeft) { this.x = b.left - padding; this.vx = -Math.abs(this.vx); }
-          else if (minDist === distRight) { this.x = b.right + padding; this.vx = Math.abs(this.vx); }
-          else if (minDist === distTop) { this.y = b.top - padding; this.vy = -Math.abs(this.vy); }
-          else { this.y = b.bottom + padding; this.vy = Math.abs(this.vy); }
-        }
-      }
+      this.y = initial ? Math.random() * (h || window.innerHeight) : (Math.random() > 0.5 ? 0 : (h || window.innerHeight));
+      this.vx = (Math.random() - 0.5) * 0.7;
+      this.vy = (Math.random() - 0.5) * 0.7;
+      this.size = Math.random() * 2.4 + 1.0;
+      this.baseAlpha = Math.random() * 0.55 + 0.4;
+      this.alpha = this.baseAlpha;
+      this.pulseSpeed = Math.random() * 0.02 + 0.01;
+      this.pulse = Math.random() * Math.PI * 2;
     }
     update() {
       this.x += this.vx;
       this.y += this.vy;
+      this.pulse += this.pulseSpeed;
+      this.alpha = this.baseAlpha + Math.sin(this.pulse) * 0.25;
 
-      if (this.x < 0) { this.x = 0; this.vx *= -1; }
-      if (this.x > w) { this.x = w; this.vx *= -1; }
-      if (this.y < 0) { this.y = 0; this.vy *= -1; }
-      if (this.y > h) { this.y = h; this.vy *= -1; }
-
-      this.avoidBoxes();
+      if (this.x < -10) this.x = w + 10;
+      if (this.x > w + 10) this.x = -10;
+      if (this.y < -10) this.y = h + 10;
+      if (this.y > h + 10) this.y = -10;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0, 212, 255, ${Math.max(0.15, Math.min(1, this.alpha))})`;
+      ctx.shadowBlur = this.size > 2 ? 8 : 4;
+      ctx.shadowColor = '#00d4ff';
+      ctx.fill();
     }
   }
 
-  resize();
-  particles = [];
-  for (let i = 0; i < 120; i++) particles.push(new Particle());
-
-  function animate(timestamp) {
-    if (timestamp - lastBoxUpdate > 500) {
-      updateObstacleBoxes();
-      lastBoxUpdate = timestamp;
+  function initParticles() {
+    particles = [];
+    const count = Math.min(350, Math.max(160, Math.floor(((w || window.innerWidth) * (h || window.innerHeight)) / 4000)));
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
     }
+  }
 
+  function animate() {
     ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim() || '#00d4ff';
     
-    ctx.beginPath();
     for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.update();
-      ctx.moveTo(p.x + p.size, p.y);
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      particles[i].update();
+      particles[i].draw();
     }
-    ctx.fill();
     
     animId = requestAnimationFrame(animate);
   }
 
+  resize();
   if (animId) cancelAnimationFrame(animId);
-  animate(0);
+  animate();
 
   window.addEventListener('pageshow', () => {
     resize();
     if (animId) cancelAnimationFrame(animId);
-    animate(0);
+    animate();
   });
 }
 
